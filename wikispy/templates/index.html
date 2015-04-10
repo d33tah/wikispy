@@ -1,4 +1,4 @@
-<html>
+{% load i18n %}{% load l10n %}<html>
 
 <head>
 <meta charset="utf-8">
@@ -10,12 +10,19 @@
 <table id="tablesorter">
 <thead>
 <tr>
-<th>Wikipedia ID</th>
+<th>{% trans "IP" %}</th>
+<th>{% trans "Title" %}</th>
+<th>{% trans "URL" %}</th>
 </tr>
 </thead>
 {% for edit in edits %}
 <tr>
-<td>{{ edit.wikipedia_id }}</td>
+<td>{{ edit.ip }}</td>
+<td>{{ edit.title }}</td>
+<td>
+<a href="https://pl.m.wikipedia.org/wiki/Specjalna:MobileDiff/{{ edit.wikipedia_id }}">URL</a>
+<a href="https://pl.wikipedia.org/w/index.php?diff=prev&oldid={{ edit.wikipedia_id }}">[2]</a>
+</td>
 </tr>
 {% endfor %}
 </table>
