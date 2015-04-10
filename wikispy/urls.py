@@ -6,6 +6,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'wikispy.views.index', name='home'),
+    url(r'^rules$', 'wikispy.views.rules', name='home'),
+    url(r'^privacy$', 'wikispy.views.privacy', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),

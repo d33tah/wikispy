@@ -1,4 +1,4 @@
-<html>
+{% load i18n %}{% load l10n %}<html>
 
 <head>
 <meta charset="utf-8">
@@ -7,6 +7,10 @@
 </head>
 
 <body>
-{% block content %}{% endblock %}
-</body>
+    <div style="float: right">
+         <a href="rules">{% trans "Rules" %}</a>
+         | <a href="privacy">{% trans "Privacy policy" %}</a>
+    </div>
+    {% block content %}{% endblock %}
+    </body>
 </html>

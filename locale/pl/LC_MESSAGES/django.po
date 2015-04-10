@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 15:35+0000\n"
+"POT-Creation-Date: 2015-04-10 15:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: wikispy/templates/index.html:13
+#: wikispy/templates/base.html:11 wikispy/templates/rules.html:4
+msgid "Rules"
+msgstr "Regulamin"
+
+#: wikispy/templates/base.html:12 wikispy/templates/privacy.html:4
+msgid "Privacy policy"
+msgstr "Polityka prywatności"
+
+#: wikispy/templates/index.html:7
 msgid "IP"
 msgstr "IP"
 
-#: wikispy/templates/index.html:14
+#: wikispy/templates/index.html:8
 msgid "Title"
 msgstr "Tytuł"
 
-#: wikispy/templates/index.html:15
+#: wikispy/templates/index.html:9
 msgid "URL"
 msgstr "URL"
+
+#: wikispy/templates/privacy.html:5
+msgid ""
+"\n"
+"1. The administrator of this website is Jacek Wielemborek, <br />\n"
+"2. The IP addresses of the users are being recorded for statistical "
+"purposes.\n"
+msgstr ""
+"\n"
+"1. Administratorem serwisu jest Jacek Wielemborek,<br />"
+"2. Adres IP użytkowników jest nagrywany w celach statystycznych.\n"
+
+#: wikispy/templates/rules.html:5
+msgid ""
+"\n"
+"1. This website contains references to data, which is available under the <a "
+"href=\"https://en.wikipedia.org/wiki/Wikipedia:"
+"Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License"
+"\">Creative Commons Attribution-ShareAlike License</a>; additional terms may "
+"apply.\n"
+msgstr ""
+"\n"
+"1. Ta strona internetowa zawiera odnośniki do treści, które udostępniane są: "
+"<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.pl\">na "
+"licencji Creative Commons: uznanie autorstwa, na tych samych warunkach</a>, "
+"z możliwością obowiązywania dodatkowych ograniczeń. Zobacz szczegółowe "
+"informacje o <a href=\"https://wikimediafoundation.org/wiki/"
+"Warunki_korzystania\">warunkach korzystania.</a>\n"
