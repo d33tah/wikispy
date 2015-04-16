@@ -3,6 +3,7 @@ from django.db import models
 from django.db import connection
 import json
 
+
 class RightAnchored(models.Lookup):
     """
     This lookup was created in order to enable queries like:
@@ -22,11 +23,13 @@ class RightAnchored(models.Lookup):
 
 models.CharField.register_lookup(RightAnchored)
 
+
 class Edit(models.Model):
     wikipedia_id = models.IntegerField()
     title = models.CharField(max_length=1024)
     wiki = models.ForeignKey('Wiki')
     rdns = models.ForeignKey('RDNS', db_column='ip')
+
 
 class RDNS(models.Model):
     class Meta:
@@ -36,8 +39,10 @@ class RDNS(models.Model):
     ip = models.GenericIPAddressField(primary_key=True)
     rdns = models.CharField(max_length=253)
 
+
 class Wiki(models.Model):
     name = models.CharField(max_length=1024)
+
 
 def plan_scans_table(d, t):
     """
