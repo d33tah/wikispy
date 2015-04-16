@@ -23,6 +23,8 @@ class Edit(models.Model):
 class RDNS(models.Model):
     class Meta:
         db_table = 'rdns'
+    # FIXME: This is not actually a primary key yet, but this walkaround worked
+    # well so far.
     ip = models.GenericIPAddressField(primary_key=True)
     rdns = models.CharField(max_length=253)
 
