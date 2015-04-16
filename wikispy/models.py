@@ -17,7 +17,6 @@ models.CharField.register_lookup(RightAnchored)
 class Edit(models.Model):
     wikipedia_id = models.IntegerField()
     title = models.CharField(max_length=1024)
-    #ip = models.GenericIPAddressField()
     wiki = models.ForeignKey('Wiki')
     rdns = models.ForeignKey('RDNS', db_column='ip')
 
