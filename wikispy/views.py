@@ -2,7 +2,7 @@ from django.shortcuts import render
 from wikispy.models import Edit
 
 def index(request):
-    edits = Edit.objects.all()[:10]
+    edits = Edit.objects.select_related().filter(rdns__rdns__rightanchored='%.gov.pl')
     return render(request, 'index.html', {'edits': edits})
 
 def rules(request):
