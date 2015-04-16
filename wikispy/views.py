@@ -1,9 +1,22 @@
 from django.shortcuts import render
 from wikispy.models import Edit
+from django.http import HttpResponseRedirect, HttpResponse
+
 
 def index(request):
-    edits = Edit.objects.select_related().filter(rdns__rdns__rightanchored='%.gov.pl')
+    return HttpResponseRedirect('/by_rdns/plwiki/.gov.pl')
+
+def by_rdns(request, wiki_name, rdns):
+    if not rdns.startswith('.'):
+        rdns = '.' + rdns
+    if '%' in rdns:
+        return error(request, "rDNS cannot contain % sign.")
+    edits = Edit.objects.select_related()
+    edits = edits.filter(rdns__rdns__rightanchored='%' + rdns)
     return render(request, 'index.html', {'edits': edits})
+
+def error(request, error_str):
+    return HttpResponse(error_str)
 
 def rules(request):
     return render(request, 'rules.html', {})
