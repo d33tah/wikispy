@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from wikispy.models import Edit
+from wikispy.models import Edit, query_scans_table
 from django.http import HttpResponseRedirect, HttpResponse
 
 
@@ -13,6 +13,8 @@ def by_rdns(request, wiki_name, rdns):
         return error(request, "rDNS cannot contain % sign.")
     edits = Edit.objects.select_related()
     edits = edits.filter(rdns__rdns__rightanchored='%' + rdns)
+    if query_scans_table(edits.query, 'wikispy_edit'):
+        return error(request, "The query is too big.")
     return render(request, 'index.html', {'edits': edits})
 
 def error(request, error_str):

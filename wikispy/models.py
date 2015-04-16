@@ -1,5 +1,8 @@
 from django.db import models
 
+from django.db import connection
+import json
+
 class RightAnchored(models.Lookup):
     lookup_name = 'rightanchored'
 
@@ -26,3 +29,39 @@ class RDNS(models.Model):
 
 class Wiki(models.Model):
     name = models.CharField(max_length=1024)
+
+def plan_scans_table(d, t):
+    print("hi")
+    if isinstance(d, list) or isinstance(d, tuple):
+        if len(d) == 1:
+            return plan_scans_table(d[0], t)
+        else:
+            raise NotImplementedError("List has more than one item")
+    elif isinstance(d, dict):
+        if 'Plans' in d:
+            if isinstance(d['Plans'], list):
+                for x in d['Plans']:
+                    if plan_scans_table(x, t):
+                        return True
+        elif 'Plan' in d:
+            return plan_scans_table(d['Plan'], t)
+        elif 'Node Type' in d and 'Relation Name' in d:
+            return d['Node Type'] == 'Seq Scan' and d['Relation Name'] == t
+        else:
+            raise NotImplementedError("d has no Plans, lan or Node Type")
+    else:
+        print(d)
+        print(type(d))
+    return False
+
+
+def query_scans_table(query, table):
+    sql, params = query.sql_with_params()
+    cursor = connection.cursor()
+    sql = "EXPLAIN (format JSON)" + sql
+    cursor.execute(sql, params)
+    d = cursor.fetchall()
+    if len(d) == 1 and len(d[0]) == 1 and isinstance(d[0][0], str):
+        d = json.loads(d[0][0])
+    print(d)
+    return plan_scans_table(d, table)
