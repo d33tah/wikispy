@@ -34,8 +34,8 @@ psql -c 'COPY rdns FROM stdin'
 Now create indexes:
 
 ```
-ALTER TABLE rdns ADD PRIMARY KEY(ip);
-CREATE INDEX on rdns(REVERSE(rdns) text_pattern_ops);
+ALTER TABLE wikispy_rdns ADD PRIMARY KEY(ip);
+CREATE INDEX on wikispy_rdns(REVERSE(rdns) text_pattern_ops);
 ```
 
 This can take up to 200GiB disk space.
