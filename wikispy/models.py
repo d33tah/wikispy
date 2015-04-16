@@ -31,7 +31,6 @@ class Wiki(models.Model):
     name = models.CharField(max_length=1024)
 
 def plan_scans_table(d, t):
-    print("hi")
     if isinstance(d, list) or isinstance(d, tuple):
         if len(d) == 1:
             return plan_scans_table(d[0], t)
@@ -50,8 +49,7 @@ def plan_scans_table(d, t):
         else:
             raise NotImplementedError("d has no Plans, lan or Node Type")
     else:
-        print(d)
-        print(type(d))
+        raise NotImplementedError("Unknown type of d")
     return False
 
 
@@ -63,5 +61,4 @@ def query_scans_table(query, table):
     d = cursor.fetchall()
     if len(d) == 1 and len(d[0]) == 1 and isinstance(d[0][0], str):
         d = json.loads(d[0][0])
-    print(d)
     return plan_scans_table(d, table)
