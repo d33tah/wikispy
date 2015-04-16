@@ -4,6 +4,14 @@ from django.db import connection
 import json
 
 class RightAnchored(models.Lookup):
+    """
+    This lookup was created in order to enable queries like:
+
+    SELECT * FROM rdns WHERE REVERSE(rdns) LIKE REVERSE('%.gov.pl%")
+
+    This was because I picked an index that forced me to call queries like
+    this.
+    """
     lookup_name = 'rightanchored'
 
     def as_sql(self, compiler, connection):
@@ -63,6 +71,7 @@ def query_scans_table(query, table):
     Tests if the given query would perform a full sequential scan on a given
     table. Only works with PostgreSQL.
     """
+    # simple str(query) wouldn't do - PostgreSQL driver mishandles quoting.
     sql, params = query.sql_with_params()
     cursor = connection.cursor()
     sql = "EXPLAIN (format JSON)" + sql
