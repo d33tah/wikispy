@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <th>{% trans "IP" %}</th>
+            <th>{% trans "rDNS" %}</th>
             <th>{% trans "Title" %}</th>
             <th>{% trans "URL" %}</th>
         </tr>
@@ -12,6 +13,7 @@
     {% for edit in edits %}
         <tr>
             <td>{{ edit.rdns.ip }}</td>
+            <td>{{ edit.rdns.rdns }}</td>
             <td>{{ edit.title }}</td>
             <td>
             <a href="https://pl.m.wikipedia.org/wiki/Specjalna:MobileDiff/{{ edit.wikipedia_id }}">URL</a>
