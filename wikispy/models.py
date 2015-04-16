@@ -44,10 +44,18 @@ class Wiki(models.Model):
     name = models.CharField(max_length=1024)
 
 
-def plan_scans_table(d, t):
+def plan_scans_table(d, table):
     """
     Recursively looks for any Plan nodes that suggest that a seq scan would be
-    performed. Returns True if such node was found.
+    performed. Returns True if such node was found. This is ugly because I was
+    too lazy to check how the data structure looked like and I basically coded
+    it based on one example.
+
+    Args:
+      d (dict/list/tuple): the dictionary to be parsed
+      table (str): string that shouldn't be scanned sequentially
+
+    Returns bool
     """
     if isinstance(d, list) or isinstance(d, tuple):
         if len(d) == 1:
@@ -63,7 +71,7 @@ def plan_scans_table(d, t):
         elif 'Plan' in d:
             return plan_scans_table(d['Plan'], t)
         elif 'Node Type' in d and 'Relation Name' in d:
-            return d['Node Type'] == 'Seq Scan' and d['Relation Name'] == t
+            return d['Node Type'] == 'Seq Scan' and d['Relation Name'] == table
         else:
             raise NotImplementedError("d has no Plans, lan or Node Type")
     else:
@@ -75,6 +83,12 @@ def query_scans_table(query, table):
     """
     Tests if the given query would perform a full sequential scan on a given
     table. Only works with PostgreSQL.
+
+    Args:
+      query (django.db.models.query.QuerySet): the query that will be checked
+      table (str): string that shouldn't be scanned sequentially
+
+    Returns bool
     """
     # simple str(query) wouldn't do - PostgreSQL driver mishandles quoting.
     sql, params = query.sql_with_params()
