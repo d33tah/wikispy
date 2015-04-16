@@ -31,6 +31,10 @@ class Wiki(models.Model):
     name = models.CharField(max_length=1024)
 
 def plan_scans_table(d, t):
+    """
+    Recursively looks for any Plan nodes that suggest that a seq scan would be
+    performed. Returns True if such node was found.
+    """
     if isinstance(d, list) or isinstance(d, tuple):
         if len(d) == 1:
             return plan_scans_table(d[0], t)
@@ -54,11 +58,17 @@ def plan_scans_table(d, t):
 
 
 def query_scans_table(query, table):
+    """
+    Tests if the given query would perform a full sequential scan on a given
+    table. Only works with PostgreSQL.
+    """
     sql, params = query.sql_with_params()
     cursor = connection.cursor()
     sql = "EXPLAIN (format JSON)" + sql
     cursor.execute(sql, params)
     d = cursor.fetchall()
+    # Django's cursor doesn't automatically decode JSON objects, so let's check
+    # for that and fix it if necessary.
     if len(d) == 1 and len(d[0]) == 1 and isinstance(d[0][0], str):
         d = json.loads(d[0][0])
     return plan_scans_table(d, table)
