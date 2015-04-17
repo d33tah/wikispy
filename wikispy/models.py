@@ -63,17 +63,17 @@ def plan_scans_table(d, table):
     """
     if isinstance(d, list) or isinstance(d, tuple):
         if len(d) == 1:
-            return plan_scans_table(d[0], t)
+            return plan_scans_table(d[0], table)
         else:
             raise NotImplementedError("List has more than one item")
     elif isinstance(d, dict):
         if 'Plans' in d:
             if isinstance(d['Plans'], list):
                 for x in d['Plans']:
-                    if plan_scans_table(x, t):
+                    if plan_scans_table(x, table):
                         return True
         elif 'Plan' in d:
-            return plan_scans_table(d['Plan'], t)
+            return plan_scans_table(d['Plan'], table)
         elif 'Node Type' in d and 'Relation Name' in d:
             return d['Node Type'] == 'Seq Scan' and d['Relation Name'] == table
         else:
@@ -82,6 +82,29 @@ def plan_scans_table(d, table):
         raise NotImplementedError("Unknown type of d")
     return False
 
+def sql_scans_table(sql, table, params=None):
+    """
+    Tests if the given SQL query would perform a full sequential scan on a
+    given table. Only works with PostgreSQL.
+
+    Args:
+      query (django.db.models.query.QuerySet): the query that will be checked
+      table (str): string that shouldn't be scanned sequentially
+
+    Returns bool
+    """
+    cursor = connection.cursor()
+    sql = "EXPLAIN (format JSON)" + sql
+    if params is not None:
+        cursor.execute(sql, params)
+    else:
+        cursor.execute(sql)
+    d = cursor.fetchall()
+    # Django's cursor doesn't automatically decode JSON objects, so let's check
+    # for that and fix it if necessary.
+    if len(d) == 1 and len(d[0]) == 1 and isinstance(d[0][0], str):
+        d = json.loads(d[0][0])
+    return plan_scans_table(d, table)
 
 def query_scans_table(query, table):
     """
@@ -96,12 +119,5 @@ def query_scans_table(query, table):
     """
     # simple str(query) wouldn't do - PostgreSQL driver mishandles quoting.
     sql, params = query.sql_with_params()
-    cursor = connection.cursor()
-    sql = "EXPLAIN (format JSON)" + sql
-    cursor.execute(sql, params)
-    d = cursor.fetchall()
-    # Django's cursor doesn't automatically decode JSON objects, so let's check
-    # for that and fix it if necessary.
-    if len(d) == 1 and len(d[0]) == 1 and isinstance(d[0][0], str):
-        d = json.loads(d[0][0])
-    return plan_scans_table(d, table)
+    return sql_scans_table(sql, table, params)
+
