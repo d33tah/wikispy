@@ -7,19 +7,25 @@ from wikispy.models import Edit, Wiki
 import ast
 import sys
 from django.db import transaction
+try:
+    import bdateutil.parser as dateparser
+except ImportError:
+    import dateutil.parser as dateparser
 
 def main():
     with transaction.atomic():
         w = Wiki()
         w.name = "plwiki"
+        w.language = "pl"
+        w.domain = "wikipedia.org"
         w.save()
         for line in sys.stdin:
             fields = ast.literal_eval(line)
             e = Edit()
             e.ip = fields[0]
             e.title = fields[1]
-            #e.time = fields[2]
-            e.wikipedia_id = int(fields[-1].split('=')[-1])
+            e.time = dateparser.parse(fields[2])
+            e.wikipedia_edit_id = int(fields[-1].split('=')[-1])
             e.wiki = w
             e.save()
 

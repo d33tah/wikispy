@@ -25,21 +25,27 @@ models.CharField.register_lookup(RightAnchored)
 
 
 class Edit(models.Model):
-    wikipedia_id = models.IntegerField()
+    wikipedia_edit_id = models.IntegerField()
     title = models.CharField(max_length=1024)
     wiki = models.ForeignKey('Wiki')
-    rdns = models.ForeignKey('RDNS', db_column='ip')
+    ip = models.GenericIPAddressField()
+    time = models.DateTimeField()
 
 
 class RDNS(models.Model):
-    # FIXME: This is not actually a primary key yet, but this walkaround worked
-    # well so far.
     ip = models.GenericIPAddressField(primary_key=True)
     rdns = models.CharField(max_length=253)
 
 
 class Wiki(models.Model):
     name = models.CharField(max_length=1024)
+    # The longest I found is zh-classical which is 12 letters long, but it
+    # won't hurt to store some more. The longest domain I found was
+    # wikimediafoundation.org which hosted all languages under a single
+    # language (articles split by categories), but still - I'll leave some room
+    # just in case.
+    language = models.CharField(max_length=32)
+    domain = models.CharField(max_length=64)
 
 
 def plan_scans_table(d, table):
