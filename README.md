@@ -41,3 +41,5 @@ CREATE INDEX on wikispy_rdns(REVERSE(rdns) text_pattern_ops);
 This can take up to 200GiB disk space.
 
 (TODO: document importing Wiki anonymous changes)
+
+REMEMBER TO CHANGE SECRET_KEY IN SETTINGS.PY!
