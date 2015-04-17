@@ -121,3 +121,35 @@ def query_scans_table(query, table):
     sql, params = query.sql_with_params()
     return sql_scans_table(sql, table, params)
 
+def get_edits_by_rdns(rdns, wikiname):
+    cursor = connection.cursor()
+    sql = """
+    SELECT  "wikispy_edit"."id",
+            "wikispy_edit"."wikipedia_edit_id",
+            "wikispy_edit"."title",
+            "wikispy_edit"."ip",
+            "wikispy_edit"."wiki_id",
+            "wikispy_edit"."time",
+            "wikispy_rdns"."rdns",
+            "wikispy_wiki"."language",
+            "wikispy_wiki"."domain"
+    FROM "wikispy_edit"
+    INNER JOIN "wikispy_rdns"
+        ON ( "wikispy_edit"."ip" = "wikispy_rdns"."ip" )
+    INNER JOIN "wikispy_wiki"
+        ON ( "wikispy_edit"."wiki_id" = "wikispy_wiki"."id" )
+    WHERE
+            REVERSE("wikispy_rdns"."rdns") LIKE REVERSE(%s)
+        AND
+            "wikispy_wiki"."name" = %s
+    ORDER BY "wikispy_edit"."title"
+    """
+    params = ['%' + rdns, wikiname]
+    #if sql_scans_table(sql, "wikispy_edit", params):
+    #    raise RuntimeError("The query is too big.")
+    # http://stackoverflow.com/a/2679222/1091116
+    cursor.execute(sql, params)
+    description = [x[0] for x in cursor.description]
+    for row in cursor:
+        yielded = dict(zip(description, row))
+        yield yielded
