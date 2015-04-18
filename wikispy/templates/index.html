@@ -4,7 +4,7 @@
 <table id="tablesorter" class="table">
     <thead>
         <tr>
-            <th>{% trans "IP" %}</th>
+            <th>{% trans "IP" %} [{% trans "WHOIS" %}]</th>
             <th>{% trans "rDNS" %}</th>
             <th>{% trans "Title" %}</th>
             <th>{% trans "Edit time" %}</th>
@@ -13,7 +13,10 @@
     </thead>
     {% for edit in edits %}
         <tr>
-            <td>{{ edit.ip }}</td>
+            <td>{{ edit.ip }} [<a
+                href="https://whois.domaintools.com/{{ edit.ip}}"
+                >{% comment %}Translators: this is an abbreviation of "WHOIS"{% endcomment %}{% trans "W" %}</a>]
+            </td>
             <td>{{ edit.rdns }}</td>
             <td>{{ edit.title }}</td>
             <td>{{ edit.time }}</td>
