@@ -19,8 +19,8 @@ def by_rdns(request, wiki_name, rdns):
         first = next(edits)
     except StopIteration:
         return error(request, _("No results were found."))
-    return render(request, 'by_rdns.html',
-                  {'edits': itertools.chain([first], edits)})
+    edits_with_first_iter = itertools.chain([first], edits)
+    return render(request, 'by_rdns.html', {'edits': edits_with_first_iter})
 
 
 def error(request, error_str):
