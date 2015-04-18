@@ -94,19 +94,22 @@ msgstr "Właśnie oglądasz:"
 #: wikispy/templates/by_rdns_random.html:19
 #, fuzzy
 msgid "rDNS: "
-msgstr "rDNS"
+msgstr "rDNS: "
 
 #: wikispy/templates/by_rdns_random.html:20
 msgid ""
 "\n"
-"    Refresh the page to see the next edit. For more information, click <a "
-"href=\"/\">HERE</a>.\n"
+"    Refresh the page to see the next edit. For more information, click\n"
 "    "
 msgstr ""
 "\n"
 "    Odśwież tę stronę aby zobaczyć następną zmianę. Aby dowiedzieć się "
-"więcej, kliknij <a href=\"/\"TUTAJ</a>.\n"
+"więcej, kliknij\n"
 "    "
+
+#: wikispy/templates/by_rdns_random.html:23
+msgid "HERE"
+msgstr "TUTAJ"
 
 #: wikispy/templates/error.html:5
 msgid "Error"
