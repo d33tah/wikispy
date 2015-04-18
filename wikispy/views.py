@@ -71,3 +71,15 @@ def view_edit(request, wiki_name, edit_number):
         url += "%s." % wiki.language
     url += "%s/wiki/Special:MobileDiff/%s" % (wiki.domain, edit_number)
     return HttpResponseRedirect(url)
+
+
+def by_rdns_random(request, wiki_name, rdns):
+
+    if not rdns.startswith('.'):
+        rdns = '.' + rdns
+
+    if '%' in rdns:
+        return error(request, _("rDNS cannot contain %s sign." % '%'))
+
+    edit = list(get_edits_by_rdns(rdns, wiki_name, random=True))[0]
+    return render(request, 'by_rdns_random.html', {'edit': edit})

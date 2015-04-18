@@ -127,13 +127,20 @@ def query_scans_table(query, table):
     sql, params = query.sql_with_params()
     return sql_scans_table(sql, table, params)
 
-def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50):
+def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50, random=False):
     cursor = connection.cursor()
-    if limit != 0:
-        limit_sql = "\nLIMIT %s" % limit
+
+    order_sql = '\nORDER BY "wikispy_edit"."title"'
+    limit_sql = ""
+    offset_sql = ""
+    if not random:
+        if limit != 0:
+            limit_sql = "\nLIMIT %s" % limit
+        offset_sql = "\nOFFSET %s" % offset
     else:
-        limit_sql = ""
-    offset_sql = "\nOFFSET %s" % offset
+        order_sql = '\nORDER BY random()'
+        limit_sql = '\nLIMIT 1'
+
     sql = """
     SELECT  "wikispy_edit"."id",
             "wikispy_edit"."wikipedia_edit_id",
@@ -154,8 +161,7 @@ def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50):
             REVERSE("wikispy_rdns"."rdns") LIKE REVERSE(%s)
         AND
             "wikispy_wiki"."name" = %s
-    ORDER BY "wikispy_edit"."title"
-    """ + limit_sql + offset_sql
+    """ + order_sql + limit_sql + offset_sql
     params = ['%' + rdns, wikiname]
     #if sql_scans_table(sql, "wikispy_edit", params):
     #    raise RuntimeError("The query is too big.")
