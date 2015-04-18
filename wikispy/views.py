@@ -63,3 +63,11 @@ def rules(request):
 
 def privacy(request):
     return render(request, 'privacy.html', {})
+
+def view_edit(request, wiki_name, edit_number):
+    wiki = Wiki.objects.filter(name=wiki_name)[0]
+    url = "https://"
+    if wiki.language:
+        url += "%s." % wiki.language
+    url += "%s/wiki/Special:MobileDiff/%s" % (wiki.domain, edit_number)
+    return HttpResponseRedirect(url)
