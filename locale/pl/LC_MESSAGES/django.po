@@ -17,6 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: wikispy/views.py:15
+#, fuzzy, python-format
+msgid "rDNS cannot contain %s sign."
+msgstr "rDNS nie może zawierać znaku %s."
+
+#: wikispy/views.py:21
+msgid "No results were found."
+msgstr "Nie znaleziono żadnych wyników."
+
 #: wikispy/templates/base.html:44 wikispy/templates/rules.html:4
 msgid "Rules"
 msgstr "Regulamin"
@@ -25,25 +34,37 @@ msgstr "Regulamin"
 msgid "Privacy policy"
 msgstr "Polityka prywatności"
 
-#: wikispy/templates/index.html:7
+#: wikispy/templates/by_rdns.html:27 wikispy/templates/by_rdns.html.py:37
 msgid "IP"
 msgstr "IP"
 
-#: wikispy/templates/index.html:8
+#: wikispy/templates/by_rdns.html:27 wikispy/templates/by_rdns.html.py:37
+msgid "WHOIS"
+msgstr "WHOIS"
+
+#: wikispy/templates/by_rdns.html:28 wikispy/templates/by_rdns.html.py:44
 msgid "rDNS"
 msgstr "rDNS"
 
-#: wikispy/templates/index.html:9
+#: wikispy/templates/by_rdns.html:29 wikispy/templates/by_rdns.html.py:48
 msgid "Title"
 msgstr "Tytuł"
 
-#: wikispy/templates/index.html:10
+#: wikispy/templates/by_rdns.html:30 wikispy/templates/by_rdns.html.py:52
 msgid "Edit time"
 msgstr "Czas edycji"
 
-#: wikispy/templates/index.html:11
+#: wikispy/templates/by_rdns.html:31 wikispy/templates/by_rdns.html.py:56
+msgid "Views (+)"
+msgstr "Obejrzeń (+)"
+
+#: wikispy/templates/by_rdns.html:32
 msgid "URL"
 msgstr "URL"
+
+#: wikispy/templates/by_rdns.html:60
+msgid "LINK"
+msgstr "LINK"
 
 #: wikispy/templates/privacy.html:5
 msgid ""

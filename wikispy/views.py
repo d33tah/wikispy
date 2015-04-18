@@ -12,7 +12,7 @@ def by_rdns(request, wiki_name, rdns):
     if not rdns.startswith('.'):
         rdns = '.' + rdns
     if '%' in rdns:
-        return error(request, _("rDNS cannot contain % sign."))
+        return error(request, _("rDNS cannot contain %s sign." % '%'))
     edits = get_edits_by_rdns(rdns, wiki_name)
     # Let's see if it has any items...
     try:
