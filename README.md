@@ -42,4 +42,7 @@ This can take up to 200GiB disk space.
 
 (TODO: document importing Wiki anonymous changes)
 
+Create indexes for Django-managed objects:
+./manage.py sqlindex
+
 REMEMBER TO CHANGE SECRET_KEY IN SETTINGS.PY!

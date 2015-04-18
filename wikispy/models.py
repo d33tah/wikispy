@@ -28,7 +28,7 @@ class Edit(models.Model):
     wikipedia_edit_id = models.IntegerField()
     title = models.CharField(max_length=1024)
     wiki = models.ForeignKey('Wiki')
-    ip = models.GenericIPAddressField()
+    ip = models.GenericIPAddressField(db_index=True)
     time = models.DateTimeField()
 
 
