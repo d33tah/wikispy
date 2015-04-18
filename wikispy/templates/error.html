@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}{% load l10n %}
+{% block title %}
+    {% block h1title %}
+        {% trans "Error" %}
+    {% endblock %}
+{% endblock %}
 {% block content %}
 <p>{{ error }}
 {% endblock %}

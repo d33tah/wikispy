@@ -22,7 +22,7 @@ msgid ""
 "Please enter rDNS and Wiki\n"
 "               or click the \"Sample query\" link below."
 msgstr ""
-"Proszę wybrać rDNS oraz Wiki\n"
+"Proszę podać rDNS oraz Wiki\n"
 "               lub kliknąć łącze \"Przykładowe zapytanie\" znajdujące "
 "się               poniżej."
 
@@ -35,68 +35,121 @@ msgstr "rDNS nie może zawierać znaku %s."
 msgid "No results were found."
 msgstr "Nie znaleziono żadnych wyników."
 
+#: wikispy/templates/base.html:8
+#, fuzzy
+msgid "WikiSpy"
+msgstr "Wiki"
+
 #: wikispy/templates/base.html:54 wikispy/templates/rules.html:4
-msgid "Rules"
-msgstr "Regulamin"
+msgid "rules"
+msgstr "regulamin"
 
 #: wikispy/templates/base.html:55 wikispy/templates/privacy.html:4
-msgid "Privacy policy"
-msgstr "Polityka prywatności"
+msgid "privacy policy"
+msgstr "polityka prywatności"
 
-#: wikispy/templates/by_rdns.html:8 wikispy/templates/by_rdns.html.py:84
+#: wikispy/templates/by_rdns.html:5
+#, python-format
+msgid "rDNS query for %(rdns)s"
+msgstr "zapytanie rDNS dla %(rdns)s"
+
+#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:89
 msgid "Previous page"
 msgstr "Poprzednia strona"
 
-#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:89
+#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:94
 msgid "Next page"
 msgstr "Następna strona"
 
-#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:94
+#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:99
 msgid "Full list"
 msgstr "Pełna lista"
 
-#: wikispy/templates/by_rdns.html:41 wikispy/templates/by_rdns.html.py:51
+#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
 msgid "IP"
 msgstr "IP"
 
-#: wikispy/templates/by_rdns.html:41 wikispy/templates/by_rdns.html.py:51
+#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
 msgid "WHOIS"
 msgstr "WHOIS"
 
-#: wikispy/templates/by_rdns.html:42 wikispy/templates/by_rdns.html.py:58
-#: wikispy/templates/index.html:11
+#: wikispy/templates/by_rdns.html:47 wikispy/templates/by_rdns.html.py:63
+#: wikispy/templates/index.html:27
 msgid "rDNS"
 msgstr "rDNS"
 
-#: wikispy/templates/by_rdns.html:43 wikispy/templates/by_rdns.html.py:62
+#: wikispy/templates/by_rdns.html:48 wikispy/templates/by_rdns.html.py:67
 msgid "Title"
 msgstr "Tytuł"
 
-#: wikispy/templates/by_rdns.html:44 wikispy/templates/by_rdns.html.py:66
+#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:71
 msgid "Edit time"
 msgstr "Czas edycji"
 
-#: wikispy/templates/by_rdns.html:45 wikispy/templates/by_rdns.html.py:70
+#: wikispy/templates/by_rdns.html:50 wikispy/templates/by_rdns.html.py:75
 msgid "Views (+)"
 msgstr "Obejrzeń (+)"
 
-#: wikispy/templates/by_rdns.html:46
+#: wikispy/templates/by_rdns.html:51
 msgid "URL"
 msgstr "URL"
 
-#: wikispy/templates/by_rdns.html:74
+#: wikispy/templates/by_rdns.html:79
 msgid "LINK"
 msgstr "LINK"
 
-#: wikispy/templates/index.html:13
+#: wikispy/templates/error.html:5
+msgid "Error"
+msgstr "Błąd"
+
+#: wikispy/templates/index.html:5
+msgid "main page"
+msgstr "strona główna"
+
+#: wikispy/templates/index.html:10
+msgid "Welcome to WikiSpy!"
+msgstr "Witaj w WikiSpy!"
+
+#: wikispy/templates/index.html:11
+msgid ""
+"WikiSpy is a website that allows you to see Wikipedia\n"
+"anonymous edits made by a given Internet domain. You can use it for example\n"
+"to discover how your government is changing the free encyclopedia and what\n"
+"the officials are doing when they are bored."
+msgstr ""
+"WikiSpy jest stroną internetową, gdzie możesz obejrzeć anonimowe zmiany\n"
+"Wikipedii dokonane przez podaną domenę Internetową. Dzięki temu możesz na\n"
+"przykład odkryć, jak Twój rząd zmienia Wikipedię i co robią urzędnicy, kiedy\n"
+"się nudzą."
+
+#: wikispy/templates/index.html:16
+msgid "How do I use that?"
+msgstr "Jak tego używać?"
+
+#: wikispy/templates/index.html:17
+msgid ""
+"Just pick enter a domain you are interested\n"
+"in and click \"Submit\" or click the \"sample query\" link below:\n"
+msgstr ""
+"Po prostu podaj domenę, którą jesteś zainteresowany "
+"i kliknij przycisk \"Wyślij\" lub kliknij link \"przykładowe zapytanie\""
+" umieszczony poniżej:\n"
+
+#. Translators: This would be the default domain
+#. suggested in the index page. gettext(u'.gov') XX
+#: wikispy/templates/index.html:31
 msgid "Wiki"
 msgstr "Wiki"
 
-#: wikispy/templates/index.html:21
+#: wikispy/templates/index.html:39
 msgid "Submit"
 msgstr "Wyślij"
 
-#: wikispy/templates/index.html:26
+#: wikispy/templates/index.html:43
+msgid ".gov"
+msgstr ".gov.pl"
+
+#: wikispy/templates/index.html:44
 msgid "Click here for a sample query."
 msgstr "Kliknij tutaj, aby obejrzeć przykładowe zapytanie."
 

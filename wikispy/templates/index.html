@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 {% load i18n %}{% load l10n %}
+{% block title %}
+    {% block h1title %}
+        {% trans "main page" %}
+    {% endblock %}
+{% endblock %}
 {% block content %}
+
+<h3>{% trans "Welcome to WikiSpy!" %}</h3>
+<p>{% blocktrans %}WikiSpy is a website that allows you to see Wikipedia
+anonymous edits made by a given Internet domain. You can use it for example
+to discover how your government is changing the free encyclopedia and what
+the officials are doing when they are bored.{% endblocktrans %}</p>
+
+<h3>{% trans "How do I use that?" %}</h3>
+<p>{% blocktrans %}Just pick enter a domain you are interested
+in and click "Submit" or click the "sample query" link below:
+{% endblocktrans %}</p>
 
 {% if error %}
 <p class="bg-danger padded">{{ error }}</p>
@@ -9,7 +25,9 @@
 <form action="." method="post" class="form-inline">{% csrf_token %}
   <div class="form-group">
     <label class="padded-top" for="rdns">{% trans "rDNS" %}:</label>
-    <input class="form-control" name="rdns" id="rdns" placeholder="microsoft.com">
+    <input class="form-control" name="rdns" id="rdns"
+      placeholder="{% comment %}Translators: This would be the default domain
+      suggested in the index page.{% endcomment %}{% trans ".gov" %}">
     <label class="padded-top" for="wiki">{% trans "Wiki" %}:</label>
     <select class="form-control" name="wiki" id="wiki">
     {% for wiki in wikis %}
@@ -22,7 +40,7 @@
 </form>
 
 <p class="padded-top">
-    <a href="/by_rdns/plwiki/.gov.pl">
+    <a href="/by_rdns/plwiki/{% trans ".gov" %}">
         {% trans "Click here for a sample query." %}
     </a>
 </p>

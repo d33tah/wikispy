@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}{% load l10n %}
+{% block title %}
+    {% block h1title %}
+        {% trans "rules" %}
+    {% endblock %}
+{% endblock %}
 {% block content %}
-<h1>{% trans "Rules" %}</h1>
 {% blocktrans %}
 1. This website contains references to data, which is available under the <a href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a>; additional terms may apply.
 {% endblocktrans %}
