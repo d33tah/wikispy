@@ -17,24 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: wikispy/views.py:15
-msgid ""
-"Please enter rDNS and Wiki\n"
-"               or click the \"Sample query\" link below."
-msgstr ""
-"Proszę podać rDNS oraz Wiki\n"
-"               lub kliknąć łącze \"Przykładowe zapytanie\" znajdujące "
-"się               poniżej."
-
-#: wikispy/views.py:35
-#, python-format
-msgid "rDNS cannot contain %s sign."
-msgstr "rDNS nie może zawierać znaku %s."
-
-#: wikispy/views.py:43
-msgid "No results were found."
-msgstr "Nie znaleziono żadnych wyników."
-
 #: wikispy/templates/base.html:8
 msgid "WikiSpy"
 msgstr "WikiSpy"
@@ -52,50 +34,79 @@ msgstr "Polityka prywatności"
 msgid "rDNS query for %(rdns)s"
 msgstr "Zapytanie rDNS dla %(rdns)s"
 
-#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:90
+#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:93
 msgid "Previous page"
 msgstr "Poprzednia strona"
 
-#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:95
+#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:98
 msgid "Next page"
 msgstr "Następna strona"
 
-#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:100
+#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:103
 msgid "Full list"
 msgstr "Pełna lista"
 
-#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
+#: wikispy/templates/by_rdns.html:27 wikispy/templates/by_rdns.html.py:107
+msgid "Random preview mode"
+msgstr "Tryb losowych podglądów"
+
+#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:59
 msgid "IP"
 msgstr "IP"
 
-#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
+#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:59
 msgid "WHOIS"
 msgstr "WHOIS"
 
-#: wikispy/templates/by_rdns.html:47 wikispy/templates/by_rdns.html.py:63
+#: wikispy/templates/by_rdns.html:50 wikispy/templates/by_rdns.html.py:66
 #: wikispy/templates/index.html:27
 msgid "rDNS"
 msgstr "rDNS"
 
-#: wikispy/templates/by_rdns.html:48 wikispy/templates/by_rdns.html.py:67
+#: wikispy/templates/by_rdns.html:51 wikispy/templates/by_rdns.html.py:70
 msgid "Title"
 msgstr "Tytuł"
 
-#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:71
+#: wikispy/templates/by_rdns.html:52 wikispy/templates/by_rdns.html.py:74
 msgid "Edit time"
 msgstr "Czas edycji"
 
-#: wikispy/templates/by_rdns.html:50 wikispy/templates/by_rdns.html.py:75
+#: wikispy/templates/by_rdns.html:53 wikispy/templates/by_rdns.html.py:78
 msgid "Views (+)"
 msgstr "Obejrzeń (+)"
 
-#: wikispy/templates/by_rdns.html:51
+#: wikispy/templates/by_rdns.html:54
 msgid "URL"
 msgstr "URL"
 
-#: wikispy/templates/by_rdns.html:79 wikispy/templates/by_rdns.html.py:80
+#: wikispy/templates/by_rdns.html:82 wikispy/templates/by_rdns.html.py:83
 msgid "LINK"
 msgstr "LINK"
+
+#: wikispy/templates/by_rdns_random.html:6
+msgid "random edit browser"
+msgstr "przeglądanie losowych zmian"
+
+#: wikispy/templates/by_rdns_random.html:18
+msgid "You are watching:"
+msgstr "Właśnie oglądasz:"
+
+#: wikispy/templates/by_rdns_random.html:19
+#, fuzzy
+msgid "rDNS: "
+msgstr "rDNS"
+
+#: wikispy/templates/by_rdns_random.html:20
+msgid ""
+"\n"
+"    Refresh the page to see the next edit. For more information, click <a "
+"href=\"/\">HERE</a>.\n"
+"    "
+msgstr ""
+"\n"
+"    Odśwież tę stronę aby zobaczyć następną zmianę. Aby dowiedzieć się "
+"więcej, kliknij <a href=\"/\"TUTAJ</a>.\n"
+"    "
 
 #: wikispy/templates/error.html:5
 msgid "Error"
@@ -179,3 +190,21 @@ msgstr ""
 "z możliwością obowiązywania dodatkowych ograniczeń. Zobacz szczegółowe "
 "informacje o <a href=\"https://wikimediafoundation.org/wiki/"
 "Warunki_korzystania\">warunkach korzystania.</a>\n"
+
+#: wikispy/views.py:15
+msgid ""
+"Please enter rDNS and Wiki\n"
+"               or click the \"Sample query\" link below."
+msgstr ""
+"Proszę podać rDNS oraz Wiki\n"
+"               lub kliknąć łącze \"Przykładowe zapytanie\" znajdujące "
+"się               poniżej."
+
+#: wikispy/views.py:35 wikispy/views.py:82
+#, python-format
+msgid "rDNS cannot contain %s sign."
+msgstr "rDNS nie może zawierać znaku %s."
+
+#: wikispy/views.py:43
+msgid "No results were found."
+msgstr "Nie znaleziono żadnych wyników."

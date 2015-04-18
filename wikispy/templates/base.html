@@ -1,4 +1,4 @@
-{% load i18n %}{% load l10n %}<!DOCTYPE html>
+  {% load i18n %}{% load l10n %}{% block html5_start %}<!DOCTYPE html>{% endblock %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -58,12 +58,12 @@
       </div>
     </nav>
 
-    <div class="container">
+    {% block div_container_start %}<div class="container">{% endblock %}
 
         <h1>{% block h1title %}{{ h1title }}{% endblock %}</h1>
         {% block content %}{% endblock %}
 
-    </div><!-- /.container -->
+    {% block div_container_end %}</div><!-- /.container -->{% endblock %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
