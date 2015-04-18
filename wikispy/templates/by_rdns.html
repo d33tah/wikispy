@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}{% load l10n %}
+{% load i18n %}{% load l10n %}{% load zwspace %}
 {% block title %}
     {% block h1title %}
         {% blocktrans %}rDNS query for {{ rdns }}{% endblocktrans %}
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-2">
                 {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "rDNS" %}</strong>:</p>{% endif %}
-                {{ edit.rdns }}
+                {{ edit.rdns|zwspace:"." }}
             </div>
             <div class="col-md-4">
                 {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "Title" %}</strong>:</p>{% endif %}
