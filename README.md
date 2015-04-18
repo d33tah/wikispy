@@ -2,8 +2,9 @@ WikiSpy
 =======
 
 WikiSpy is a website that allows you to find all changes done by a specified
-domain. You can use it for example to see what part of Wikipedia a given
-company edited and sometimes spot interesting propaganda being added.
+domain on a website powered by MediaWiki (e.g. Wikipedia). You can use it for
+example to see what part of Wikipedia a given company edited and sometimes spot
+interesting propaganda being added.
 
 Here you can browse the code that powers the website. If you would like to take
 a look at the actual website, you will have to wait until the author finally
