@@ -5,7 +5,17 @@ from django.utils.translation import ugettext as _
 import itertools
 
 def index(request):
-    return render(request, 'index.html', {})
+    rdns = request.POST.get('rdns', None)
+    wiki = request.POST.get('wiki', None)
+    template_params = {}
+    if rdns and wiki:
+        return HttpResponseRedirect('/by_rdns/%s/%s' % (wiki, rdns))
+    else:
+        template_params['error'] = _(
+            '''Please enter rDNS and Wiki
+               or click the "Sample query" link below.'''
+        )
+    return render(request, 'index.html', template_params)
 
 
 def by_rdns(request, wiki_name, rdns, offset, pagesize):

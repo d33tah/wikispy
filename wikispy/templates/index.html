@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}{% load l10n %}
 {% block content %}
-<a href="/by_rdns/plwiki/.gov.pl">{% trans "Click here for a sample query." %}</a>
+
+{% if error %}
+<p class="bg-danger padded">{{ error }}</p>
+{% endif %}
+
+<form action="." method="post">{% csrf_token %}
+  <div class="form-group">
+    <label class="padded-top" for="rdns">{% trans "rDNS" %}:</label>
+    <input class="form-control" name="rdns" id="rdns" placeholder="microsoft.com">
+    <label class="padded-top" for="wiki">{% trans "Wiki" %}:</label>
+    <input class="form-control" name="wiki" id="wiki" value="plwiki">
+  </div>
+  <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+</form>
+
+<p class="padded-top">
+    <a href="/by_rdns/plwiki/.gov.pl">
+        {% trans "Click here for a sample query." %}
+    </a>
+</p>
 {% endblock %}
