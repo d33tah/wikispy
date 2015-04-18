@@ -127,9 +127,12 @@ def query_scans_table(query, table):
     sql, params = query.sql_with_params()
     return sql_scans_table(sql, table, params)
 
-def get_edits_by_rdns(rdns, wikiname, limit=50, offset=0):
+def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50):
     cursor = connection.cursor()
-    limit_sql = "\nLIMIT %s" % limit
+    if limit != 0:
+        limit_sql = "\nLIMIT %s" % limit
+    else:
+        limit_sql = ""
     offset_sql = "\nOFFSET %s" % offset
     sql = """
     SELECT  "wikispy_edit"."id",
