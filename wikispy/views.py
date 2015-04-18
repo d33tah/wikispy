@@ -8,7 +8,8 @@ def index(request):
     return HttpResponseRedirect('/by_rdns/plwiki/.gov.pl')
 
 
-def by_rdns(request, wiki_name, rdns):
+def by_rdns(request, wiki_name, rdns, offset):
+    print(offset)
     if not rdns.startswith('.'):
         rdns = '.' + rdns
     if '%' in rdns:
@@ -20,7 +21,12 @@ def by_rdns(request, wiki_name, rdns):
     except StopIteration:
         return error(request, _("No results were found."))
     edits_with_first_iter = itertools.chain([first], edits)
-    return render(request, 'by_rdns.html', {'edits': edits_with_first_iter})
+    return render(request, 'by_rdns.html', {
+        'edits': edits_with_first_iter,
+        'wiki_name': wiki_name,
+        'rdns': rdns,
+        'offset': offset,
+    })
 
 
 def error(request, error_str):
