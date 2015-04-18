@@ -25,11 +25,12 @@ models.CharField.register_lookup(RightAnchored)
 
 
 class Edit(models.Model):
-    wikipedia_edit_id = models.IntegerField()
+    wikipedia_edit_id = models.IntegerField(db_index=True)
     title = models.CharField(max_length=1024)
     wiki = models.ForeignKey('Wiki')
     ip = models.GenericIPAddressField(db_index=True)
     time = models.DateTimeField()
+    views_count = models.IntegerField(default=0)
 
 
 class RDNS(models.Model):
@@ -46,6 +47,11 @@ class Wiki(models.Model):
     # just in case.
     language = models.CharField(max_length=32)
     domain = models.CharField(max_length=64)
+
+class ViewRecord(models.Model):
+    ip = models.GenericIPAddressField(db_index=True)
+    wikipedia_edit_id = models.IntegerField()
+    wiki = models.ForeignKey('Wiki')
 
 
 def plan_scans_table(d, table):
@@ -130,6 +136,7 @@ def get_edits_by_rdns(rdns, wikiname):
             "wikispy_edit"."ip",
             "wikispy_edit"."wiki_id",
             "wikispy_edit"."time",
+            "wikispy_edit"."view_count",
             "wikispy_rdns"."rdns",
             "wikispy_wiki"."language",
             "wikispy_wiki"."domain"
