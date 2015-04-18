@@ -27,7 +27,7 @@ msgstr ""
 "się               poniżej."
 
 #: wikispy/views.py:35
-#, fuzzy, python-format
+#, python-format
 msgid "rDNS cannot contain %s sign."
 msgstr "rDNS nie może zawierać znaku %s."
 
@@ -36,32 +36,31 @@ msgid "No results were found."
 msgstr "Nie znaleziono żadnych wyników."
 
 #: wikispy/templates/base.html:8
-#, fuzzy
 msgid "WikiSpy"
-msgstr "Wiki"
+msgstr "WikiSpy"
 
-#: wikispy/templates/base.html:54 wikispy/templates/rules.html:4
-msgid "rules"
-msgstr "regulamin"
+#: wikispy/templates/base.html:54 wikispy/templates/rules.html:5
+msgid "Rules"
+msgstr "Regulamin"
 
-#: wikispy/templates/base.html:55 wikispy/templates/privacy.html:4
-msgid "privacy policy"
-msgstr "polityka prywatności"
+#: wikispy/templates/base.html:55 wikispy/templates/privacy.html:5
+msgid "Privacy policy"
+msgstr "Polityka prywatności"
 
 #: wikispy/templates/by_rdns.html:5
 #, python-format
 msgid "rDNS query for %(rdns)s"
-msgstr "zapytanie rDNS dla %(rdns)s"
+msgstr "Zapytanie rDNS dla %(rdns)s"
 
-#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:89
+#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:90
 msgid "Previous page"
 msgstr "Poprzednia strona"
 
-#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:94
+#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:95
 msgid "Next page"
 msgstr "Następna strona"
 
-#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:99
+#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:100
 msgid "Full list"
 msgstr "Pełna lista"
 
@@ -94,7 +93,7 @@ msgstr "Obejrzeń (+)"
 msgid "URL"
 msgstr "URL"
 
-#: wikispy/templates/by_rdns.html:79
+#: wikispy/templates/by_rdns.html:79 wikispy/templates/by_rdns.html.py:80
 msgid "LINK"
 msgstr "LINK"
 
@@ -103,8 +102,8 @@ msgid "Error"
 msgstr "Błąd"
 
 #: wikispy/templates/index.html:5
-msgid "main page"
-msgstr "strona główna"
+msgid "Main page"
+msgstr "Strona główna"
 
 #: wikispy/templates/index.html:10
 msgid "Welcome to WikiSpy!"
@@ -119,7 +118,8 @@ msgid ""
 msgstr ""
 "WikiSpy jest stroną internetową, gdzie możesz obejrzeć anonimowe zmiany\n"
 "Wikipedii dokonane przez podaną domenę Internetową. Dzięki temu możesz na\n"
-"przykład odkryć, jak Twój rząd zmienia Wikipedię i co robią urzędnicy, kiedy\n"
+"przykład odkryć, jak Twój rząd zmienia Wikipedię i co robią urzędnicy, "
+"kiedy\n"
 "się nudzą."
 
 #: wikispy/templates/index.html:16
@@ -131,9 +131,8 @@ msgid ""
 "Just pick enter a domain you are interested\n"
 "in and click \"Submit\" or click the \"sample query\" link below:\n"
 msgstr ""
-"Po prostu podaj domenę, którą jesteś zainteresowany "
-"i kliknij przycisk \"Wyślij\" lub kliknij link \"przykładowe zapytanie\""
-" umieszczony poniżej:\n"
+"Po prostu podaj domenę, którą jesteś zainteresowany i kliknij przycisk "
+"\"Wyślij\" lub kliknij link \"przykładowe zapytanie\" umieszczony poniżej:\n"
 
 #. Translators: This would be the default domain
 #. suggested in the index page. gettext(u'.gov') XX
@@ -153,7 +152,7 @@ msgstr ".gov.pl"
 msgid "Click here for a sample query."
 msgstr "Kliknij tutaj, aby obejrzeć przykładowe zapytanie."
 
-#: wikispy/templates/privacy.html:5
+#: wikispy/templates/privacy.html:9
 msgid ""
 "\n"
 "1. The administrator of this website is Jacek Wielemborek, <br />\n"
@@ -164,7 +163,7 @@ msgstr ""
 "1. Administratorem serwisu jest Jacek Wielemborek,<br />2. Adres IP "
 "użytkowników jest nagrywany w celach statystycznych.\n"
 
-#: wikispy/templates/rules.html:5
+#: wikispy/templates/rules.html:9
 msgid ""
 "\n"
 "1. This website contains references to data, which is available under the <a "

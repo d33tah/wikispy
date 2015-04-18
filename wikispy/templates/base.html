@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% trans "WikiSpy" %} - {% block title %}{{ title }}{% endblock %}</title>
+    <title>{% block title %}{{ title }}{% endblock %} - {% trans "WikiSpy" %}</title>
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
 
     <div class="container">
 
-        <h1>WikiSpy - {% block h1title %}{{ h1title }}{% endblock %}</h1>
+        <h1>{% block h1title %}{{ h1title }}{% endblock %}</h1>
         {% block content %}{% endblock %}
 
     </div><!-- /.container -->
