@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from wikispy.models import get_edits_by_rdns
+from wikispy.models import get_edits_by_rdns, Wiki
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _
 import itertools
@@ -10,11 +10,13 @@ def index(request):
     template_params = {}
     if rdns and wiki:
         return HttpResponseRedirect('/by_rdns/%s/%s' % (wiki, rdns))
-    else:
+    elif request.POST:
         template_params['error'] = _(
             '''Please enter rDNS and Wiki
                or click the "Sample query" link below.'''
         )
+    wikis = list(Wiki.objects.all())
+    template_params['wikis'] = wikis
     return render(request, 'index.html', template_params)
 
 
