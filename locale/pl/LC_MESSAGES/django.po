@@ -17,54 +17,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: wikispy/views.py:15
+#: wikispy/views.py:23
 #, fuzzy, python-format
 msgid "rDNS cannot contain %s sign."
 msgstr "rDNS nie może zawierać znaku %s."
 
-#: wikispy/views.py:21
+#: wikispy/views.py:31
 msgid "No results were found."
 msgstr "Nie znaleziono żadnych wyników."
 
-#: wikispy/templates/base.html:44 wikispy/templates/rules.html:4
+#: wikispy/templates/base.html:47 wikispy/templates/rules.html:4
 msgid "Rules"
 msgstr "Regulamin"
 
-#: wikispy/templates/base.html:45 wikispy/templates/privacy.html:4
+#: wikispy/templates/base.html:48 wikispy/templates/privacy.html:4
 msgid "Privacy policy"
 msgstr "Polityka prywatności"
 
-#: wikispy/templates/by_rdns.html:27 wikispy/templates/by_rdns.html.py:37
+#: wikispy/templates/by_rdns.html:22 wikispy/templates/by_rdns.html.py:32
 msgid "IP"
 msgstr "IP"
 
-#: wikispy/templates/by_rdns.html:27 wikispy/templates/by_rdns.html.py:37
+#: wikispy/templates/by_rdns.html:22 wikispy/templates/by_rdns.html.py:32
 msgid "WHOIS"
 msgstr "WHOIS"
 
-#: wikispy/templates/by_rdns.html:28 wikispy/templates/by_rdns.html.py:44
+#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:39
 msgid "rDNS"
 msgstr "rDNS"
 
-#: wikispy/templates/by_rdns.html:29 wikispy/templates/by_rdns.html.py:48
+#: wikispy/templates/by_rdns.html:24 wikispy/templates/by_rdns.html.py:43
 msgid "Title"
 msgstr "Tytuł"
 
-#: wikispy/templates/by_rdns.html:30 wikispy/templates/by_rdns.html.py:52
+#: wikispy/templates/by_rdns.html:25 wikispy/templates/by_rdns.html.py:47
 msgid "Edit time"
 msgstr "Czas edycji"
 
-#: wikispy/templates/by_rdns.html:31 wikispy/templates/by_rdns.html.py:56
+#: wikispy/templates/by_rdns.html:26 wikispy/templates/by_rdns.html.py:51
 msgid "Views (+)"
 msgstr "Obejrzeń (+)"
 
-#: wikispy/templates/by_rdns.html:32
+#: wikispy/templates/by_rdns.html:27
 msgid "URL"
 msgstr "URL"
 
-#: wikispy/templates/by_rdns.html:60
+#: wikispy/templates/by_rdns.html:55
 msgid "LINK"
 msgstr "LINK"
+
+#: wikispy/templates/by_rdns.html:65
+msgid "Previous page"
+msgstr "Poprzednia strona"
+
+#: wikispy/templates/by_rdns.html:70
+msgid "Next page"
+msgstr "Następna strona"
+
+#: wikispy/templates/by_rdns.html:75
+msgid "Full list"
+msgstr "Pełna lista"
+
+#: wikispy/templates/index.html:4
+msgid "Click here for a sample query."
+msgstr "Kliknij tutaj, aby obejrzeć przykładowe zapytanie."
 
 #: wikispy/templates/privacy.html:5
 msgid ""

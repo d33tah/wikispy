@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 import itertools
 
 def index(request):
-    return HttpResponseRedirect('/by_rdns/plwiki/.gov.pl')
+    return render(request, 'index.html', {})
 
 
 def by_rdns(request, wiki_name, rdns, offset, pagesize):
