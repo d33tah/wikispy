@@ -46,4 +46,7 @@ This can take up to 200GiB disk space.
 Create indexes for Django-managed objects:
 ./manage.py sqlindex
 
+Compile translations:
+./manage.py compilemessages
+
 REMEMBER TO CHANGE SECRET_KEY IN SETTINGS.PY!
