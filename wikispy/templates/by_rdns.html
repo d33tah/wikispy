@@ -1,30 +1,56 @@
 {% extends "base.html" %}
 {% load i18n %}{% load l10n %}
 {% block content %}
+<!-- TODO: delegate this to a separate CSS -->
+<style>
+.show-grid
+{
+    margin-bottom:10px;
+}
+
+.show-grid [class^=col-]
+{
+    border:1px solid rgba(86,61,124,.2);
+    padding-bottom:10px;
+    padding-top:10px;
+}
+</style>
 <table id="tablesorter" class="table">
-    <thead>
-        <tr>
-            <th>{% trans "IP" %} [{% trans "WHOIS" %}]</th>
-            <th>{% trans "rDNS" %}</th>
-            <th>{% trans "Title" %}</th>
-            <th>{% trans "Edit time" %}</th>
-            <th>{% trans "URL" %}</th>
-        </tr>
-    </thead>
+<div class="container">
+
+    <div class="row show-grid hidden-xs">
+        <div class="col-md-2"><strong>{% trans "IP" %} [{% trans "WHOIS" %}]</strong></div>
+        <div class="col-md-2"><strong>{% trans "rDNS" %}</strong></div>
+        <div class="col-md-4"><strong>{% trans "Title" %}</strong></div>
+        <div class="col-md-2"><strong>{% trans "Edit time" %}</strong></div>
+        <div class="col-md-2"><strong>{% trans "URL" %}</strong></div>
+    </div>
     {% for edit in edits %}
-        <tr>
-            <td>{{ edit.ip }} [<a
-                href="https://whois.domaintools.com/{{ edit.ip}}"
+        <div class="row show-grid">
+            <div class="col-md-2">
+                <p class="visible-xs-inline"><strong>{% trans "IP" %} [{% trans "WHOIS" %}]</strong>:</p>
+
+                {{ edit.ip }}
+                [<a href="https://whois.domaintools.com/{{ edit.ip}}"
                 >{% comment %}Translators: this is an abbreviation of "WHOIS"{% endcomment %}{% trans "W" %}</a>]
-            </td>
-            <td>{{ edit.rdns }}</td>
-            <td>{{ edit.title }}</td>
-            <td>{{ edit.time }}</td>
-            <td>
+            </div>
+            <div class="col-md-2">
+                <p class="visible-xs-inline"><strong>{% trans "rDNS" %}</strong>:</p>
+                {{ edit.rdns }}
+            </div>
+            <div class="col-md-4">
+                <p class="visible-xs-inline"><strong>{% trans "Title" %}</strong>:</p>
+                {{ edit.title }}
+            </div>
+            <div class="col-md-2">
+                <p class="visible-xs-inline"><strong>{% trans "Edit time" %}</strong>:</p>
+                {{ edit.time }}
+            </div>
+            <div class="col-md-2">
             <a href="https://pl.m.wikipedia.org/wiki/Specjalna:MobileDiff/{{ edit.wikipedia_edit_id }}">URL</a>
             <a href="https://pl.wikipedia.org/w/index.php?diff=prev&oldid={{ edit.wikipedia_edit_id }}">[2]</a>
-            </td>
-        </tr>
+            </div>
+        </div>
     {% endfor %}
-</table>
+</div>
 {% endblock %}
