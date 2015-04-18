@@ -37,6 +37,7 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
         'wiki_name': wiki_name,
         'rdns': rdns,
         'offset': offset,
+        'skip_labels': pagesize == 0,
     })
 
 

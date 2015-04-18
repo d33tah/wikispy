@@ -18,7 +18,7 @@
 <table id="tablesorter" class="table">
 <div class="container">
 
-    <div class="row show-grid hidden-xs">
+    <div class="row show-grid {% if not skip_labels %}hidden-xs{% endif %}">
         <div class="col-md-2"><strong>{% trans "IP" %} [{% trans "WHOIS" %}]</strong></div>
         <div class="col-md-2"><strong>{% trans "rDNS" %}</strong></div>
         <div class="col-md-4"><strong>{% trans "Title" %}</strong></div>
@@ -29,26 +29,26 @@
     {% for edit in edits %}
         <div class="row show-grid">
             <div class="col-md-2">
-                <p class="visible-xs-inline"><strong>{% trans "IP" %} [{% trans "WHOIS" %}]</strong>:</p>
+                {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "IP" %} [{% trans "WHOIS" %}]</strong>:</p>{% endif %}
 
                 {{ edit.ip }}
                 [<a href="https://whois.domaintools.com/{{ edit.ip}}"
                 >{% comment %}Translators: this is an abbreviation of "WHOIS"{% endcomment %}{% trans "W" %}</a>]
             </div>
             <div class="col-md-2">
-                <p class="visible-xs-inline"><strong>{% trans "rDNS" %}</strong>:</p>
+                {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "rDNS" %}</strong>:</p>{% endif %}
                 {{ edit.rdns }}
             </div>
             <div class="col-md-4">
-                <p class="visible-xs-inline"><strong>{% trans "Title" %}</strong>:</p>
+                {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "Title" %}</strong>:</p>{% endif %}
                 {{ edit.title }}
             </div>
             <div class="col-md-2">
-                <p class="visible-xs-inline"><strong>{% trans "Edit time" %}</strong>:</p>
+                {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "Edit time" %}</strong>:</p>{% endif %}
                 {{ edit.time }}
             </div>
             <div class="col-md-1">
-                <p class="visible-xs-inline"><strong>{% trans "Views (+)" %}</strong>:</p>
+                {% if not skip_labels %}<p class="visible-xs-inline"><strong>{% trans "Views (+)" %}</strong>:</p>{% endif %}
                 {{ edit.view_count }}
             </div>
             <div class="col-md-1">
