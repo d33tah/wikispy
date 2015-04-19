@@ -135,8 +135,8 @@ def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50, random=False):
     offset_sql = ""
     if not random:
         if limit != 0:
-            limit_sql = "\nLIMIT %s" % limit
-        offset_sql = "\nOFFSET %s" % offset
+            limit_sql = "\nLIMIT %s" % int(limit)
+        offset_sql = "\nOFFSET %s" % int(offset)
     else:
         order_sql = '\nORDER BY random()'
         limit_sql = '\nLIMIT 1'
