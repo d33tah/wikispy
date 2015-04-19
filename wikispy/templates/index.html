@@ -8,13 +8,13 @@
 {% block content %}
 
 <h3>{% trans "Welcome to WikiSpy!" %}</h3>
-<p>{% blocktrans %}WikiSpy is a website that allows you to see Wikipedia
-anonymous edits made by a given Internet domain. You can use it for example
-to discover how your government is changing the free encyclopedia and what
-the officials are doing when they are bored.{% endblocktrans %}</p>
+<p class="text-justify">{% blocktrans %}WikiSpy is a website that allows you to
+see Wikipedia anonymous edits made by a given Internet domain. You can use it
+for example to discover how your government is changing the free encyclopedia
+and what the officials are doing when they are bored.{% endblocktrans %}</p>
 
 <h3>{% trans "How do I use that?" %}</h3>
-<p>{% blocktrans %}Just pick enter a domain you are interested
+<p class="text-justify">{% blocktrans %}Just pick enter a domain you are interested
 in and click "Submit" or click the "sample query" link below:
 {% endblocktrans %}</p>
 
@@ -46,14 +46,15 @@ in and click "Submit" or click the "sample query" link below:
 </p>
 
 <h3>{% trans "How does it work?" %}</h3>
-<p>{% blocktrans %}Wikipedia allows all users to download its whole history
-dating back to the very first changes. This website allows you to query
-a database that was created by downloading such an archive and looking for
-changes made by unregistered users. Such changes are recorded along with the IP
-address of the person who made them. WikiSpy joins this data with a database
-of so-called "reverse DNS" domains tied to the IP addresses. After that, all
-you need to do is enter a domain and you can see changes tied to it - what
-article was changed, when, by which IP and what was the change about.
+<p class="text-justify">{% blocktrans %}Wikipedia allows all users to download
+its whole history dating back to the very first changes. This website allows
+you to query a database that was created by downloading such an archive and
+looking for changes made by unregistered users. Such changes are recorded
+along with the IP address of the person who made them. WikiSpy joins this data
+with a database of so-called "reverse DNS" domains tied to the IP addresses.
+After that, all you need to do is enter a domain and you can see changes tied
+to it - what article was changed, when, by which IP and what was the change
+about.
 <a href="/info">Find out more here.</a>
 {% endblocktrans %}</p>
 
