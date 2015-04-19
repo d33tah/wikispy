@@ -29,7 +29,35 @@ article was changed, when, by which IP and what was the change about.
 
 <h3>{% trans "How to read the reports?" %}</h3>
 {% blocktrans %}
-This section is going to be filled in soon.
+<p class="text-justify">On WikiSpy, you can get a report related to changes
+made on a given Wikipedia by a specified domain.
+<a href="/by_rdns/plwiki/.gov">Here's a sample report</a>.
+It contains six columns: IP, rDNS, title, date, view count and a URL to the
+page showing the changes.</p>
+
+<p class="text-justify">The first column - IP - is the Internet Protocol
+address of the computer which made the change. In the same column you can
+find a hyperlink marked as [W], where you can conveniently check in the
+WHOIS internet registry who is the current owner of this address. The second
+column is rDNS, which is the reverse DNS hostname - the name associated to
+the IP address, set by the network administrator. The third and the fourth
+columns tell which article and when was edited.</p>
+
+<p class="text-justify">The next, fifth column is the approximate number of
+people (measured by the number of unique IP addresses of the viewers) that
+saw the given change using this website. This is being tracked by the links
+in the next column.</p>
+
+<p class="text-justify">The final column is probably the most
+interesting - it links to a page displaying what the change was about.
+The first link, named "LINK", links to simplified version of the page,
+which might be more easily readable for people who are not advanced
+Wikipedia users. Changes made there are highlighted in green when the given
+fragment was added as a part of the currently viewed revision. The red color
+means that the fragment was removed and white background shows the context
+in which the change was made. The second hyperlink in this column, marked
+as [2], leads to the "two-column" version of the changes list. It might
+give more information and was not meant for mobile devices.</p>
 {% endblocktrans %}
 
 <h3>{% trans "How reliable is the data?" %}</h3>
