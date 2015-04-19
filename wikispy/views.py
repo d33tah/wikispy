@@ -65,6 +65,9 @@ def rules(request):
 def privacy(request):
     return render(request, 'privacy.html', {})
 
+def info(request):
+    return render(request, 'info.html', {})
+
 def view_edit(request, wiki_name, edit_number):
     wiki = Wiki.objects.filter(name=wiki_name)[0]
     url = "https://"

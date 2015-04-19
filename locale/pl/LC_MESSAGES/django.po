@@ -29,57 +29,65 @@ msgstr "Regulamin"
 msgid "Privacy policy"
 msgstr "Polityka prywatności"
 
+#: wikispy/templates/base.html:56
+msgid "Help & info"
+msgstr "Pomoc i informacje"
+
+#: wikispy/templates/base.html:63
+msgid "Fork me on GitHub"
+msgstr "Forkuj mnie na GitHub"
+
 #: wikispy/templates/by_rdns.html:5
 #, python-format
 msgid "rDNS query for %(rdns)s"
 msgstr "Zapytanie rDNS dla %(rdns)s"
 
-#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:93
+#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:90
 msgid "Previous page"
 msgstr "Poprzednia strona"
 
-#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:98
+#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:95
 msgid "Next page"
 msgstr "Następna strona"
 
-#: wikispy/templates/by_rdns.html:23 wikispy/templates/by_rdns.html.py:103
+#: wikispy/templates/by_rdns.html:21 wikispy/templates/by_rdns.html.py:98
 msgid "Full list"
 msgstr "Pełna lista"
 
-#: wikispy/templates/by_rdns.html:27 wikispy/templates/by_rdns.html.py:107
+#: wikispy/templates/by_rdns.html:25 wikispy/templates/by_rdns.html.py:102
 msgid "Random preview mode"
 msgstr "Tryb losowych podglądów"
 
-#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:59
+#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
 msgid "IP"
 msgstr "IP"
 
-#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:59
+#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
 msgid "WHOIS"
 msgstr "WHOIS"
 
-#: wikispy/templates/by_rdns.html:50 wikispy/templates/by_rdns.html.py:66
+#: wikispy/templates/by_rdns.html:47 wikispy/templates/by_rdns.html.py:63
 #: wikispy/templates/index.html:27
 msgid "rDNS"
 msgstr "rDNS"
 
-#: wikispy/templates/by_rdns.html:51 wikispy/templates/by_rdns.html.py:70
+#: wikispy/templates/by_rdns.html:48 wikispy/templates/by_rdns.html.py:67
 msgid "Title"
 msgstr "Tytuł"
 
-#: wikispy/templates/by_rdns.html:52 wikispy/templates/by_rdns.html.py:74
+#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:71
 msgid "Edit time"
 msgstr "Czas edycji"
 
-#: wikispy/templates/by_rdns.html:53 wikispy/templates/by_rdns.html.py:78
+#: wikispy/templates/by_rdns.html:50 wikispy/templates/by_rdns.html.py:75
 msgid "Views (+)"
 msgstr "Obejrzeń (+)"
 
-#: wikispy/templates/by_rdns.html:54
+#: wikispy/templates/by_rdns.html:51
 msgid "URL"
 msgstr "URL"
 
-#: wikispy/templates/by_rdns.html:82 wikispy/templates/by_rdns.html.py:83
+#: wikispy/templates/by_rdns.html:79 wikispy/templates/by_rdns.html.py:80
 msgid "LINK"
 msgstr "LINK"
 
@@ -123,7 +131,7 @@ msgstr "Strona główna"
 msgid "Welcome to WikiSpy!"
 msgstr "Witaj w WikiSpy!"
 
-#: wikispy/templates/index.html:11
+#: wikispy/templates/index.html:11 wikispy/templates/info.html:10
 msgid ""
 "WikiSpy is a website that allows you to see Wikipedia\n"
 "anonymous edits made by a given Internet domain. You can use it for example\n"
@@ -136,7 +144,7 @@ msgstr ""
 "kiedy\n"
 "się nudzą."
 
-#: wikispy/templates/index.html:16
+#: wikispy/templates/index.html:16 wikispy/templates/info.html:15
 msgid "How do I use that?"
 msgstr "Jak tego używać?"
 
@@ -165,6 +173,92 @@ msgstr ".gov.pl"
 #: wikispy/templates/index.html:44
 msgid "Click here for a sample query."
 msgstr "Kliknij tutaj, aby obejrzeć przykładowe zapytanie."
+
+#: wikispy/templates/index.html:48 wikispy/templates/info.html:19
+msgid "How does it work?"
+msgstr "Jak to działa?"
+
+#: wikispy/templates/index.html:49
+msgid ""
+"Wikipedia allows all users to download its whole history\n"
+"dating back to the very first changes. This website allows you to query\n"
+"a database that was created by downloading such an archive and looking for\n"
+"changes made by unregistered users. Such changes are recorded along with the "
+"IP\n"
+"address of the person who made them. WikiSpy joins this data with a "
+"database\n"
+"of so-called \"reverse DNS\" domains tied to the IP addresses. After that, "
+"all\n"
+"you need to do is enter a domain and you can see changes tied to it - what\n"
+"article was changed, when, by which IP and what was the change about.\n"
+"<a href=\"/info\">Find out more here.</a>\n"
+msgstr ""
+"Wikipedia pozwala wszystkim użytkownikom pobrać całą swoją historię\n"
+"zmian aż do pierwszych naniesionych poprawek. Niniejsza strona pozwala\n"
+"przeszukiwać bazę danych stworzoną dzięki takiemu archiwum poprzez\n"
+"wyszukiwanie edycji dokonanych przez niezarejestrowanych użytkowników.\n"
+"Takie zmiany są zapisywane razem z adresem IP osoby, która je naniosła.\n"
+"WikiSpy łączy te dane z bazą danych zawierającą tak zwany \"reverse DNS"
+"\"powiązany z adresem IP. Następnie, zostało Ci tylko podanie interesującej\n"
+"Cię domeny i możesz zobaczyć powiązane z nią zmiany - który artykuł był\n"
+"zmieniony, kiedy, przez jakie IP i na czym polegała zmiana.\n"
+"<a href=\"/info\">Dowiedz się więcej tutaj.</a>\n"
+
+#: wikispy/templates/info.html:5
+msgid "Help and information"
+msgstr "Pomoc i informacje"
+
+#: wikispy/templates/info.html:9
+msgid "What is WikiSpy?"
+msgstr "Czym jest WikiSpy?"
+
+#: wikispy/templates/info.html:16
+msgid ""
+"Visit <a href=\"/\">the home page</a> and follow the\n"
+"instructions there."
+msgstr ""
+"Odwiedź <a href=\"/\">stronę główną</a> i postępuj zgodnie ze wskazówkami."
+
+#: wikispy/templates/info.html:20
+msgid ""
+"Wikipedia allows all users to download its whole history\n"
+"dating back to the very first changes. This website allows you to query\n"
+"a database that was created by downloading such an archive and looking for\n"
+"changes made by unregistered users. Such changes are recorded along with the "
+"IP\n"
+"address of the person who made them. WikiSpy joins this data with a "
+"database\n"
+"of so-called \"reverse DNS\" domains tied to the IP addresses. After that, "
+"all\n"
+"you need to do is enter a domain and you can see changes tied to it - what\n"
+"article was changed, when, by which IP and what was the change about.\n"
+msgstr ""
+"Wikipedia pozwala wszystkim użytkownikom pobrać całą swoją historię\n"
+"zmian aż do pierwszych naniesionych poprawek. Niniejsza strona pozwala\n"
+"przeszukiwać bazę danych stworzoną dzięki takiemu archiwum poprzez\n"
+"wyszukiwanie edycji dokonanych przez niezarejestrowanych użytkowników.\n"
+"Takie zmiany są zapisywane razem z adresem IP osoby, która je naniosła.\n"
+"WikiSpy łączy te dane z bazą danych zawierającą tak zwany \"reverse DNS"
+"\"powiązany z adresem IP. Następnie, zostało Ci tylko podanie interesującej\n"
+"Cię domeny i możesz zobaczyć powiązane z nią zmiany - który artykuł był\n"
+"zmieniony, kiedy, przez jakie IP i na czym polegała zmiana.\n"
+"<a href=\"/info\">Dowiedz się więcej tutaj.</a>\n"
+
+#: wikispy/templates/info.html:30
+msgid "How to read the reports?"
+msgstr "Jak czytać raporty?"
+
+#: wikispy/templates/info.html:31 wikispy/templates/info.html.py:36
+msgid ""
+"\n"
+"This section is going to be filled in soon.\n"
+msgstr ""
+"\n"
+"Ta sekcja zostanie wkrótce uzupełniona.\n"
+
+#: wikispy/templates/info.html:35
+msgid "How reliable is the data?"
+msgstr "Na ile wiarygodne są te dane?"
 
 #: wikispy/templates/privacy.html:9
 msgid ""
@@ -203,7 +297,7 @@ msgstr ""
 "               lub kliknąć łącze \"Przykładowe zapytanie\" znajdujące "
 "się               poniżej."
 
-#: wikispy/views.py:35 wikispy/views.py:82
+#: wikispy/views.py:35 wikispy/views.py:86
 #, python-format
 msgid "rDNS cannot contain %s sign."
 msgstr "rDNS nie może zawierać znaku %s."

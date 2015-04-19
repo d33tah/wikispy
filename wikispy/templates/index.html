@@ -44,4 +44,17 @@ in and click "Submit" or click the "sample query" link below:
         {% trans "Click here for a sample query." %}
     </a>
 </p>
+
+<h3>{% trans "How does it work?" %}</h3>
+<p>{% blocktrans %}Wikipedia allows all users to download its whole history
+dating back to the very first changes. This website allows you to query
+a database that was created by downloading such an archive and looking for
+changes made by unregistered users. Such changes are recorded along with the IP
+address of the person who made them. WikiSpy joins this data with a database
+of so-called "reverse DNS" domains tied to the IP addresses. After that, all
+you need to do is enter a domain and you can see changes tied to it - what
+article was changed, when, by which IP and what was the change about.
+<a href="/info">Find out more here.</a>
+{% endblocktrans %}</p>
+
 {% endblock %}
