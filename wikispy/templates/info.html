@@ -34,7 +34,24 @@ This section is going to be filled in soon.
 
 <h3>{% trans "How reliable is the data?" %}</h3>
 {% blocktrans %}
-This section is going to be filled in soon.
+<p>While evaluating the data, keep in mind that it might be inaccurate in case
+of the old records and incomplete in a way. Here is why:</p>
+
+<p>We translate IP addresses to reverse DNS entries based on a data set that
+was published quite recently. At the same time, a lot of WikiSpy entries date
+back to a few years ago, which means that the IPs could be owned by different
+entities then. Because of that, the later the particular Wikipedia revision
+was made, the more accurately it was matched to its reverse DNS.</p>
+
+<p>As for the incompleteness of the data, it is important to remember that
+the reports show only changes made by unregistered users. We do not track
+the registered ones as these do now show in the Wikipedia history along with
+their IP address.</p>
+
+<p>Now, here's some good news: the project can be reproduced and verified by
+anyone. The data sets on which WikiSpy is based are widely available and the
+source code behind this website and the database generation tool can be found on
+<a href="https://github.com/d33tah/wikispy">GitHub</a>.</p>
 {% endblocktrans %}
 
 {% endblock %}
