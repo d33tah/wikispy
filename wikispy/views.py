@@ -44,7 +44,7 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
 
     edits_with_first_iter = itertools.chain([first], edits)
 
-    return render(request, 'by_rdns.html', {
+    return render(request, 'display_edits.html', {
         'edits': edits_with_first_iter,
         'wiki_name': wiki_name,
         'rdns': rdns,
