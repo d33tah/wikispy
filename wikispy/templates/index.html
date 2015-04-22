@@ -45,6 +45,30 @@ in and click "Submit" or click the "sample query" link below:
     </a>
 </p>
 
+<h3>{% trans "Search by IP range" %}</h3>
+
+<p class="text-justify">{% blocktrans %}You can also search by IP range. Just fill
+the start IP and end IP (inclusive) in the forms below:{% endblocktrans %}</p>
+
+<form action="." method="post" class="form-inline">{% csrf_token %}
+  <div class="form-group">
+    <label class="padded-top" for="startip">{% trans "Start IP" %}:</label>
+    <input class="form-control" name="startip" id="startip">
+
+    <label class="padded-top" for="endip">{% trans "End IP" %}:</label>
+    <input class="form-control" name="endip" id="endip">
+
+    <label class="padded-top" for="wiki">{% trans "Wiki" %}:</label>
+    <select class="form-control" name="wiki" id="wiki">
+    {% for wiki in wikis %}
+      <option value="{{ wiki.name }}">{{ wiki.name }}</option>
+    {% endfor %}
+    </select>
+
+  </div>
+  <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+</form>
+
 <h3>{% trans "How does it work?" %}</h3>
 <p class="text-justify">{% blocktrans %}Wikipedia allows all users to download
 its whole history dating back to the very first changes. This website allows

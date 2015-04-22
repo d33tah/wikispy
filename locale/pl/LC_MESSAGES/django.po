@@ -17,24 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: wikispy/views.py:15
-msgid ""
-"Please enter rDNS and Wiki\n"
-"               or click the \"Sample query\" link below."
-msgstr ""
-"Proszę podać rDNS oraz Wiki\n"
-"               lub kliknąć łącze \"Przykładowe zapytanie\" znajdujące "
-"się               poniżej."
-
-#: wikispy/views.py:35 wikispy/views.py:86
-#, python-format
-msgid "rDNS cannot contain %s sign."
-msgstr "rDNS nie może zawierać znaku %s."
-
-#: wikispy/views.py:43
-msgid "No results were found."
-msgstr "Nie znaleziono żadnych wyników."
-
 #: wikispy/templates/base.html:8
 msgid "WikiSpy"
 msgstr "WikiSpy"
@@ -54,60 +36,6 @@ msgstr "Pomoc i informacje"
 #: wikispy/templates/base.html:63
 msgid "Fork me on GitHub"
 msgstr "Forkuj mnie na GitHub"
-
-#: wikispy/templates/by_rdns.html:5
-#, python-format
-msgid "rDNS query for %(rdns)s"
-msgstr "Zapytanie rDNS dla %(rdns)s"
-
-#: wikispy/templates/by_rdns.html:13 wikispy/templates/by_rdns.html.py:90
-msgid "Previous page"
-msgstr "Poprzednia strona"
-
-#: wikispy/templates/by_rdns.html:18 wikispy/templates/by_rdns.html.py:95
-msgid "Next page"
-msgstr "Następna strona"
-
-#: wikispy/templates/by_rdns.html:21 wikispy/templates/by_rdns.html.py:98
-msgid "Full list"
-msgstr "Pełna lista"
-
-#: wikispy/templates/by_rdns.html:25 wikispy/templates/by_rdns.html.py:102
-msgid "Random preview mode"
-msgstr "Tryb losowych podglądów"
-
-#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
-msgid "IP"
-msgstr "IP"
-
-#: wikispy/templates/by_rdns.html:46 wikispy/templates/by_rdns.html.py:56
-msgid "WHOIS"
-msgstr "WHOIS"
-
-#: wikispy/templates/by_rdns.html:47 wikispy/templates/by_rdns.html.py:63
-#: wikispy/templates/index.html:27
-msgid "rDNS"
-msgstr "rDNS"
-
-#: wikispy/templates/by_rdns.html:48 wikispy/templates/by_rdns.html.py:67
-msgid "Title"
-msgstr "Tytuł"
-
-#: wikispy/templates/by_rdns.html:49 wikispy/templates/by_rdns.html.py:71
-msgid "Edit time"
-msgstr "Czas edycji"
-
-#: wikispy/templates/by_rdns.html:50 wikispy/templates/by_rdns.html.py:75
-msgid "Views (+)"
-msgstr "Obejrzeń (+)"
-
-#: wikispy/templates/by_rdns.html:51
-msgid "URL"
-msgstr "URL"
-
-#: wikispy/templates/by_rdns.html:79 wikispy/templates/by_rdns.html.py:80
-msgid "LINK"
-msgstr "LINK"
 
 #: wikispy/templates/by_rdns_random.html:6
 msgid "random edit browser"
@@ -136,6 +64,75 @@ msgstr ""
 #: wikispy/templates/by_rdns_random.html:23
 msgid "HERE"
 msgstr "TUTAJ"
+
+#: wikispy/templates/display_edits.html:6
+#, python-format
+msgid "rDNS query for %(rdns)s"
+msgstr "Zapytanie rDNS dla %(rdns)s"
+
+#: wikispy/templates/display_edits.html:9
+#, python-format
+msgid "Query for IP range %(startip)s - %(endip)s"
+msgstr "Zapytanie dla zakresu IP %(startip)s - %(endip)s"
+
+#: wikispy/templates/display_edits.html:18
+#: wikispy/templates/display_edits.html:97
+msgid "Previous page"
+msgstr "Poprzednia strona"
+
+#: wikispy/templates/display_edits.html:23
+#: wikispy/templates/display_edits.html:102
+msgid "Next page"
+msgstr "Następna strona"
+
+#: wikispy/templates/display_edits.html:26
+#: wikispy/templates/display_edits.html:105
+msgid "Full list"
+msgstr "Pełna lista"
+
+#: wikispy/templates/display_edits.html:31
+#: wikispy/templates/display_edits.html:110
+msgid "Random preview mode"
+msgstr "Tryb losowych podglądów"
+
+#: wikispy/templates/display_edits.html:53
+#: wikispy/templates/display_edits.html:63
+msgid "IP"
+msgstr "IP"
+
+#: wikispy/templates/display_edits.html:53
+#: wikispy/templates/display_edits.html:63
+msgid "WHOIS"
+msgstr "WHOIS"
+
+#: wikispy/templates/display_edits.html:54
+#: wikispy/templates/display_edits.html:70 wikispy/templates/index.html:27
+msgid "rDNS"
+msgstr "rDNS"
+
+#: wikispy/templates/display_edits.html:55
+#: wikispy/templates/display_edits.html:74
+msgid "Title"
+msgstr "Tytuł"
+
+#: wikispy/templates/display_edits.html:56
+#: wikispy/templates/display_edits.html:78
+msgid "Edit time"
+msgstr "Czas edycji"
+
+#: wikispy/templates/display_edits.html:57
+#: wikispy/templates/display_edits.html:82
+msgid "Views (+)"
+msgstr "Obejrzeń (+)"
+
+#: wikispy/templates/display_edits.html:58
+msgid "URL"
+msgstr "URL"
+
+#: wikispy/templates/display_edits.html:86
+#: wikispy/templates/display_edits.html:87
+msgid "LINK"
+msgstr "LINK"
 
 #: wikispy/templates/error.html:5
 msgid "Error"
@@ -178,11 +175,11 @@ msgstr ""
 
 #. Translators: This would be the default domain
 #. suggested in the index page. gettext(u'.gov') XX
-#: wikispy/templates/index.html:31
+#: wikispy/templates/index.html:31 wikispy/templates/index.html.py:61
 msgid "Wiki"
 msgstr "Wiki"
 
-#: wikispy/templates/index.html:39
+#: wikispy/templates/index.html:39 wikispy/templates/index.html.py:69
 msgid "Submit"
 msgstr "Wyślij"
 
@@ -194,11 +191,31 @@ msgstr ".gov.pl"
 msgid "Click here for a sample query."
 msgstr "Kliknij tutaj, aby obejrzeć przykładowe zapytanie."
 
-#: wikispy/templates/index.html:48 wikispy/templates/info.html:20
+#: wikispy/templates/index.html:48
+msgid "Search by IP range"
+msgstr "Wyszukuj po zakresie IP"
+
+#: wikispy/templates/index.html:50
+msgid ""
+"You can also search by IP range. Just fill\n"
+"the start IP and end IP (inclusive) in the forms below:"
+msgstr ""
+"Możesz także wyszukiwać po zakresach adresów IP. Po prostu podaj\n"
+"początkowy oraz końcowy adres IP (włącznie) w formularzu poniżej:"
+
+#: wikispy/templates/index.html:55
+msgid "Start IP"
+msgstr "Początkowe IP"
+
+#: wikispy/templates/index.html:58
+msgid "End IP"
+msgstr "Końcowe IP"
+
+#: wikispy/templates/index.html:72 wikispy/templates/info.html:20
 msgid "How does it work?"
 msgstr "Jak to działa?"
 
-#: wikispy/templates/index.html:49
+#: wikispy/templates/index.html:73
 msgid ""
 "Wikipedia allows all users to download\n"
 "its whole history dating back to the very first changes. This website "
@@ -244,8 +261,8 @@ msgid ""
 msgstr ""
 "WikiSpy jest stroną internetową, gdzie możesz obejrzeć anonimowe zmiany\n"
 "Wikipedii dokonane przez podaną domenę Internetową. Dzięki temu możesz na\n"
-"przykład odkryć, jak Twój rząd zmienia Wikipedię i co robią urzędnicy, "
-"kiedy się nudzą.\n"
+"przykład odkryć, jak Twój rząd zmienia Wikipedię i co robią urzędnicy, kiedy "
+"się nudzą.\n"
 
 #: wikispy/templates/info.html:17
 msgid ""
@@ -403,6 +420,24 @@ msgstr ""
 "z możliwością obowiązywania dodatkowych ograniczeń. Zobacz szczegółowe "
 "informacje o <a href=\"https://wikimediafoundation.org/wiki/"
 "Warunki_korzystania\">warunkach korzystania.</a>\n"
+
+#: wikispy/views.py:23
+msgid ""
+"Please fill out the required fields\n"
+"                   or click the \"Sample query\" link below."
+msgstr ""
+"Proszę wypełnić wymagane pola\n"
+"               lub kliknąć łącze \"Przykładowe zapytanie\" znajdujące "
+"się               poniżej."
+
+#: wikispy/views.py:44 wikispy/views.py:126
+#, python-format
+msgid "rDNS cannot contain %s sign."
+msgstr "rDNS nie może zawierać znaku %s."
+
+#: wikispy/views.py:52 wikispy/views.py:82
+msgid "No results were found."
+msgstr "Nie znaleziono żadnych wyników."
 
 #~ msgid ""
 #~ "\n"

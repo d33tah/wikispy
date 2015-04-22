@@ -2,27 +2,34 @@
 {% load i18n %}{% load l10n %}{% load zwspace %}
 {% block title %}
     {% block h1title %}
+        {% if rdns %}
         {% blocktrans %}rDNS query for {{ rdns }}{% endblocktrans %}
+        {% endif %}
+        {% if startip %}
+        {% blocktrans %}Query for IP range {{ startip }} - {{ endip }}{% endblocktrans %}
+        {% endif %}
     {% endblock %}
 {% endblock %}
 {% block content %}
 <p>
 
     {% if offset > 0 %}
-    <a href="/by_rdns/{{ wiki_name }}/{{ rdns }}/{{ offset|add:"-50" }}">
+    <a href="{{ baseurl }}/{{ offset|add:"-50" }}">
         {% trans "Previous page" %}</a>
     |
     {% endif %}
     {% if pagesize != 0 %}
-    <a href="/by_rdns/{{ wiki_name }}/{{ rdns }}/{{ offset|add:"50" }}">
+    <a href="{{ baseurl }}/{{ offset|add:"50" }}">
         {% trans "Next page" %}</a>
     |
-    <a href="/by_rdns/{{ wiki_name }}/{{ rdns }}/0/0">
+    <a href="{{ baseurl }}/0/0">
         {% trans "Full list" %}</a>
-    |
     {% endif %}
-    <a href="/by_rdns_random/{{ wiki_name }}/{{ rdns }}" class="text-success">
-        {% trans "Random preview mode" %}</a>
+    {% if baserandomurl %}
+    |
+        <a href="{{ baserandomurl }}" class="text-success">
+            {% trans "Random preview mode" %}</a>
+    {% endif %}
 </p>
 
 <!-- TODO: delegate this to a separate CSS -->
@@ -86,19 +93,21 @@
 <p>
 
     {% if offset > 0 %}
-    <a href="/by_rdns/{{ wiki_name }}/{{ rdns }}/{{ offset|add:"-50" }}">
+    <a href="{{ baseurl }}/{{ offset|add:"-50" }}">
         {% trans "Previous page" %}</a>
     |
     {% endif %}
     {% if pagesize != 0 %}
-    <a href="/by_rdns/{{ wiki_name }}/{{ rdns }}/{{ offset|add:"50" }}">
+    <a href="{{ baseurl }}/{{ offset|add:"50" }}">
         {% trans "Next page" %}</a>
     |
-    <a href="/by_rdns/{{ wiki_name }}/{{ rdns }}/0/0">
+    <a href="{{ baseurl }}/0/0">
         {% trans "Full list" %}</a>
-    |
     {% endif %}
-    <a href="/by_rdns_random/{{ wiki_name }}/{{ rdns }}" class="text-success">
-        {% trans "Random preview mode" %}</a>
+    {% if baserandomurl %}
+    |
+        <a href="{{ baserandomurl }}" class="text-success">
+            {% trans "Random preview mode" %}</a>
+    {% endif %}
 </p>
 {% endblock %}

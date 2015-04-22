@@ -127,8 +127,10 @@ def query_scans_table(query, table):
     sql, params = query.sql_with_params()
     return sql_scans_table(sql, table, params)
 
-def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50, random=False):
+def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
+              startip=None, endip=None):
     cursor = connection.cursor()
+    cursor.execute("SET enable_seqscan=off;")
 
     order_sql = '\nORDER BY "wikispy_edit"."title"'
     limit_sql = ""
@@ -140,6 +142,12 @@ def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50, random=False):
     else:
         order_sql = '\nORDER BY random()'
         limit_sql = '\nLIMIT 1'
+    if rdns is not None:
+        where_sql = 'REVERSE("wikispy_rdns"."rdns") LIKE REVERSE(%s)'
+        params = ['%' + rdns, wikiname]
+    elif startip is not None and endip is not None:
+        where_sql = '"wikispy_edit"."ip" >= %s and "wikispy_edit"."ip" <= %s'
+        params = [startip, endip, wikiname]
 
     sql = """
     SELECT  "wikispy_edit"."id",
@@ -158,11 +166,10 @@ def get_edits_by_rdns(rdns, wikiname, offset=0, limit=50, random=False):
     INNER JOIN "wikispy_wiki"
         ON ( "wikispy_edit"."wiki_id" = "wikispy_wiki"."id" )
     WHERE
-            REVERSE("wikispy_rdns"."rdns") LIKE REVERSE(%s)
+    """ + where_sql + """
         AND
             "wikispy_wiki"."name" = %s
     """ + order_sql + limit_sql + offset_sql
-    params = ['%' + rdns, wikiname]
     #if sql_scans_table(sql, "wikispy_edit", params):
     #    raise RuntimeError("The query is too big.")
     # http://stackoverflow.com/a/2679222/1091116
