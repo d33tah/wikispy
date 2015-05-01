@@ -30,7 +30,7 @@ class Edit(models.Model):
     wiki = models.ForeignKey('Wiki')
     ip = models.GenericIPAddressField(db_index=True)
     time = models.DateTimeField()
-    views_count = models.IntegerField(default=0)
+    view_count = models.IntegerField(default=0)
 
 
 class RDNS(models.Model):
