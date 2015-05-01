@@ -43,21 +43,39 @@ pypy ./make-rdns.py | \
 psql -c 'COPY rdns FROM stdin'
 ```
 
-Now create indexes:
+Now create an index:
 
 ```
 ALTER TABLE wikispy_rdns ADD PRIMARY KEY(ip);
-CREATE INDEX on wikispy_rdns(REVERSE(rdns) text_pattern_ops);
 ```
 
-This can take up to 200GiB disk space.
+Now we can download a Wiki and extract anonymous changes from it. Let's use etree for that:
 
-(TODO: document importing Wiki anonymous changes)
+```
+wget https://dumps.wikimedia.org/simplewiki/latest/simplewiki-latest-pages-meta-history.xml.7z
+7z x -so simplewiki-latest-pages-meta-history.xml.7z  2>/dev/null | etree.py > out.json
+psql -c 'DROP TABLE IF EXISTS rdns_me; CREATE TABLE rdns_me(ip inet)'
+cut -d'"' -f4 < out.json | uniq | sort | uniq | psql -c 'COPY rdns_me FROM STDIN'
+psql -c 'COPY (SELECT r.* from rdns_me t JOIN wikispy_rdns r ON t.ip=r.ip) TO STDOUT;' > rdns.txt
+```
 
-Create indexes for Django-managed objects:
-./manage.py sqlindex
+The final command took 15 minutes on my PC. Now, remove any indexes and
+constraints for wikispy_edit. Once you have done that, insert a Wiki and bulk
+load the data, after which you should restore the indexes:
 
-Compile translations:
+```
+# TODO: explain how to remove the indexes
+./bulkload-copy.py 2 rdns.txt < out.json | sed -e 's@\\@\\\\@g' > copy.sql
+psql -c "INSERT INTO wikispy_wiki VALUES (1, 'simplewiki', 'simple', 'wikipedia.org');"
+psql -c 'COPY wikispy_edit (wikipedia_edit_id, title, wiki_id, ip, time, view_count, rdns) FROM STDIN' < copy.sql
+# TODO: explain how to restore the indexes
+```
+
+Unless I messed up this HOWTO, this should be enough to start up the site. Now,
+compile translations:
+
+```
 ./manage.py compilemessages
+```
 
-REMEMBER TO CHANGE SECRET_KEY IN SETTINGS.PY!
+*ALSO, REMEMBER TO CHANGE SECRET_KEY IN SETTINGS.PY!*
