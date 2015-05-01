@@ -43,6 +43,7 @@ pypy ./make-rdns.py | \
 psql -c 'COPY rdns FROM stdin'
 ```
 
+"pv" is just there to show you a progress bar. You can replace it with "cat".
 Now create an index:
 
 ```
