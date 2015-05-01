@@ -10,6 +10,17 @@ Here you can browse the code that powers the website. If you would like to take
 a look at the actual website, you will have to wait until the author finally
 brings it up. I will update this document and point there when it happens.
 
+Depencencies
+============
+
+1. Python 2
+2. django 1.8 or newer
+3. psycopg2, psycopg2ct or psycopg2cffi
+4. PostgreSQL
+
+There might be more dependencies that I had not listed yet.
+
+
 Installation
 ============
 
