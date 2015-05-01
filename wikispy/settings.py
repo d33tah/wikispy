@@ -12,7 +12,10 @@ try:
     import psycopg2
 except ImportError:
     # Fall back to psycopg2-ctypes
-    from psycopg2ct import compat
+    try:
+        from psycopg2ct import compat
+    except ImportError:
+        from psycopg2cffi import compat
     compat.register()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
