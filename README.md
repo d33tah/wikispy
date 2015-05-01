@@ -66,7 +66,7 @@ load the data, after which you should restore the indexes:
 
 ```
 # TODO: explain how to remove the indexes
-./bulkload-copy.py 2 rdns.txt < out.json | sed -e 's@\\@\\\\@g' > copy.sql
+./bulkload-copy.py 1 rdns.txt < out.json | sed -e 's@\\@\\\\@g' > copy.sql
 psql -c "INSERT INTO wikispy_wiki VALUES (1, 'simplewiki', 'simple', 'wikipedia.org');"
 psql -c 'COPY wikispy_edit (wikipedia_edit_id, title, wiki_id, ip, time, view_count, rdns) FROM STDIN' < copy.sql
 # TODO: explain how to restore the indexes
