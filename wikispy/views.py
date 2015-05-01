@@ -64,7 +64,7 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
         'pagesize': pagesize,
         'skip_labels': pagesize == 0,
         'baseurl' : '/by_rdns/' + wiki_name + '/' + rdns,
-        'baseurlrandom' : '/by_rdns_random/' + wiki_name + '/' + rdns,
+        'baserandomurl' : '/by_rdns_random/' + wiki_name + '/' + rdns,
     })
 
 def by_ip(request, wiki_name, startip, endip, offset, pagesize):
