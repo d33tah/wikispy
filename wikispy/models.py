@@ -31,10 +31,6 @@ class Edit(models.Model):
     ip = models.GenericIPAddressField(db_index=True)
     time = models.DateTimeField()
     view_count = models.IntegerField(default=0)
-
-
-class RDNS(models.Model):
-    ip = models.GenericIPAddressField(primary_key=True)
     rdns = models.CharField(max_length=253)
 
 
@@ -83,7 +79,9 @@ def plan_scans_table(d, table):
         elif 'Node Type' in d and 'Relation Name' in d:
             return d['Node Type'] == 'Seq Scan' and d['Relation Name'] == table
         else:
-            raise NotImplementedError("d has no Plans, lan or Node Type")
+            if d.get('Node Type') == 'Bitmap Index Scan':
+                return False
+            raise NotImplementedError("d has no Plans, Plan or Node Type")
     else:
         raise NotImplementedError("Unknown type of d")
     return False
@@ -143,7 +141,7 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
         order_sql = '\nORDER BY random()'
         limit_sql = '\nLIMIT 1'
     if rdns is not None:
-        where_sql = 'REVERSE("wikispy_rdns"."rdns") LIKE REVERSE(%s)'
+        where_sql = 'REVERSE("wikispy_edit"."rdns") LIKE REVERSE(%s)'
         params = ['%' + rdns, wikiname]
     elif startip is not None and endip is not None:
         where_sql = '"wikispy_edit"."ip" >= %s and "wikispy_edit"."ip" <= %s'
@@ -157,12 +155,10 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
             "wikispy_edit"."wiki_id",
             "wikispy_edit"."time",
             "wikispy_edit"."view_count",
-            "wikispy_rdns"."rdns",
+            "wikispy_edit"."rdns",
             "wikispy_wiki"."language",
             "wikispy_wiki"."domain"
     FROM "wikispy_edit"
-    INNER JOIN "wikispy_rdns"
-        ON ( "wikispy_edit"."ip" = "wikispy_rdns"."ip" )
     INNER JOIN "wikispy_wiki"
         ON ( "wikispy_edit"."wiki_id" = "wikispy_wiki"."id" )
     WHERE
@@ -170,6 +166,9 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
         AND
             "wikispy_wiki"."name" = %s
     """ + order_sql + limit_sql + offset_sql
+
+    if sql_scans_table(sql, 'wikispy_edit', params):
+        raise ValueError("The query is too big.")
     #if sql_scans_table(sql, "wikispy_edit", params):
     #    raise RuntimeError("The query is too big.")
     # http://stackoverflow.com/a/2679222/1091116

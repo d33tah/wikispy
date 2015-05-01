@@ -43,7 +43,10 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
     if '%' in rdns:
         return error(request, _("rDNS cannot contain %s sign." % '%'))
 
-    edits = get_edits(wiki_name, offset, pagesize, rdns=rdns)
+    try:
+        edits = get_edits(wiki_name, offset, pagesize, rdns=rdns)
+    except ValueError:
+        return error(request, _("The query is too big."))
 
     # Let's see if it has any items...
     try:
