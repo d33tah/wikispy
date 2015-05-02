@@ -18,6 +18,7 @@ import sys
 import re
 import socket
 import json
+import os
 
 MATCH_REGEX = ('^\x0314\[\[\x0307(.*?)\x0314\]\]\x034 .*?\x0310 \x0302(.*?)'
     '\x03 \x035\*\x03 \x0303(.*?)\x03 \x035\*\x03 \(\+?(.*?)\) \x0310(.*?)'
