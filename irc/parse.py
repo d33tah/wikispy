@@ -25,6 +25,9 @@ MATCH_REGEX = ('^\x0314\[\[\x0307(.*?)\x0314\]\]\x034 .*?\x0310 \x0302(.*?)'
 )
 MATCH_TITLES = ['title', 'diff_url', 'ip', 'change_size']
 
+# make stdout unbuffered
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+
 
 def valid_ip(address):
     try:

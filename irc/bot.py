@@ -26,6 +26,7 @@ import os
 
 import irc.client
 
+# make stdout unbuffered
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 
