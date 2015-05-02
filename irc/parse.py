@@ -15,7 +15,6 @@ Author: Jacek Wielemborek, licensed under WTFPL.
 """
 
 import sys
-import uuid
 import re
 import socket
 import json
@@ -26,12 +25,14 @@ MATCH_REGEX = ('^\x0314\[\[\x0307(.*?)\x0314\]\]\x034 .*?\x0310 \x0302(.*?)'
 )
 MATCH_TITLES = ['title', 'diff_url', 'ip', 'change_size']
 
+
 def valid_ip(address):
     try:
         socket.inet_aton(address)
         return True
     except:
         return False
+
 
 def handle_message(channel, now, payload):
 
@@ -41,7 +42,7 @@ def handle_message(channel, now, payload):
         return
 
     json_dict = {MATCH_TITLES[i]: match.groups()[i]
-                 for i in range(len(MATCH_TITLES)) }
+                 for i in range(len(MATCH_TITLES))}
 
     if not valid_ip(json_dict['ip']):
         return
@@ -63,6 +64,7 @@ def handle_message(channel, now, payload):
     json_dict['timestamp'] = now
 
     print(json.dumps(json_dict))
+
 
 def main():
     for line in sys.stdin:

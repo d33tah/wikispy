@@ -18,11 +18,8 @@ Author: Jacek Wielemborek, licensed under WTFPL.
 """
 
 import sys
-import argparse
-import itertools
 import datetime
 import uuid
-import re
 import socket
 import json
 import os
@@ -31,6 +28,7 @@ import irc.client
 
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
+
 def valid_ip(address):
     try:
         socket.inet_aton(address)
@@ -38,13 +36,16 @@ def valid_ip(address):
     except:
         return False
 
+
 def on_connect(connection, event):
     sys.stderr.write("Connected.\n")
     for channel in sys.argv[4:]:
         connection.join(channel)
 
+
 def on_disconnect(connection, event):
     raise SystemExit()
+
 
 def on_pubmsg(connection, msg):
 
@@ -55,6 +56,7 @@ def on_pubmsg(connection, msg):
     now = str(datetime.datetime.utcnow().isoformat())
     channel = msg.target
     print(json.dumps({'now': now, 'channel': channel, 'payload': payload}))
+
 
 def main():
     reactor = irc.client.Reactor()
