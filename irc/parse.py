@@ -66,6 +66,7 @@ def handle_message(channel, now, payload):
         json_dict['id'] = change_id[0]
         del json_dict['diff_url']
     json_dict['timestamp'] = now
+    json_dict['channel'] = channel
 
     print(json.dumps(json_dict))
 
