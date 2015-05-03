@@ -38,24 +38,26 @@ def valid_ip(address):
         return False
 
 
-def handle_message(channel, now, payload):
+def handle_message(skip_rdns, channel, now, payload):
 
     match = re.match(MATCH_REGEX, payload)
     if match is None:
-        sys.stderr.write("No match: %s\n" % repr(payload))
+        sys.stderr.write("No match: %s, %s\n" % (channel, repr(payload)))
         return
 
     json_dict = {MATCH_TITLES[i]: match.groups()[i]
                  for i in range(len(MATCH_TITLES))}
 
+
     if not valid_ip(json_dict['ip']):
         return
-    try:
-        json_dict['rdns'] = socket.gethostbyaddr(json_dict['ip'])[0]
-    except socket.herror:  # [Errno 1] Unknown host
-        pass
-    except socket.gaierror:  # [Errno -2] Name or service not known
-        pass
+    if not skip_rdns:
+        try:
+            json_dict['rdns'] = socket.gethostbyaddr(json_dict['ip'])[0]
+        except socket.herror:  # [Errno 1] Unknown host
+            pass
+        except socket.gaierror:  # [Errno -2] Name or service not known
+            pass
 
     del json_dict['change_size']
     change_id = re.findall('diff=([0-9]+)&', json_dict['diff_url'])
@@ -71,11 +73,11 @@ def handle_message(channel, now, payload):
     print(json.dumps(json_dict))
 
 
-def main():
+def main(skip_rdns):
     for line in sys.stdin:
         if not line.startswith('{'):
             continue
-        handle_message(**json.loads(line))
+        handle_message(skip_rdns, **json.loads(line))
 
 if __name__ == '__main__':
-    main()
+    main(len(sys.argv) > 1)
