@@ -72,6 +72,7 @@ class LogBotFactory(protocol.ClientFactory):
 
     def clientConnectionFailed(self, connector, reason):
         sys.stderr.write("Connection failed: %s. Reconnecting.\n" % reason)
+        connector.reconnect()
 
 
 if __name__ == '__main__':
