@@ -468,6 +468,10 @@ msgstr "rDNS nie może zawierać znaku %s."
 msgid "No results were found."
 msgstr "Nie znaleziono żadnych wyników."
 
+#: wikispy/views.py:133
+msgid "No edits found."
+msgstr "Nie znaleziono żadnych wyników."
+
 #~ msgid ""
 #~ "\n"
 #~ "This section is going to be filled in soon.\n"

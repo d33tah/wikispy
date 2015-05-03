@@ -128,7 +128,10 @@ def by_rdns_random(request, wiki_name, rdns):
     if '%' in rdns:
         return error(request, _("rDNS cannot contain %s sign." % '%'))
 
-    edit = list(get_edits(wiki_name, random=True, rdns=rdns))[0]
+    edits = list(get_edits(wiki_name, random=True, rdns=rdns))
+    if len(edits) == 0:
+        return error(request, _("No edits found."))
+    edit = edits[0]
     language = edit['language'] + '.' if edit['language'] else ''
     url = "https://%s%s/w/index.php?diff=prev&oldid=%s" % (language,
         edit['domain'], edit['wikipedia_edit_id'])
