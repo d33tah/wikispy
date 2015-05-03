@@ -17,63 +17,63 @@ The output is meant to be consumed by parse.py.
 Author: Jacek Wielemborek, licensed under WTFPL.
 """
 
-import sys
+# twisted imports
+from twisted.words.protocols import irc
+from twisted.internet import reactor, protocol
+from twisted.python import log
+
+# system imports
 import datetime
-import uuid
-import socket
+import sys
 import json
-import os
-
-import irc.client
-
-# make stdout unbuffered
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+import uuid
 
 
-def valid_ip(address):
-    try:
-        socket.inet_aton(address)
-        return True
-    except:
-        return False
+class LogBot(irc.IRCClient):
+    """A logging IRC bot."""
+
+    nickname = "%s-%s" % (sys.argv[3], str(uuid.uuid4()))
+
+    def connectionMade(self):
+        irc.IRCClient.connectionMade(self)
+
+    def connectionLost(self, reason):
+        irc.IRCClient.connectionLost(self, reason)
+
+    # callbacks for events
+
+    def signedOn(self):
+        """Called when bot has succesfully signed on to server."""
+        for channel in sys.argv[4:]:
+            self.join(channel)
+
+    def privmsg(self, user, channel, msg):
+        """This will get called when the bot receives a message."""
+
+        now = str(datetime.datetime.utcnow().isoformat())
+        print(json.dumps({'channel': channel, 'now': now, 'payload': msg}))
+        sys.stdout.flush()
 
 
-def on_connect(connection, event):
-    sys.stderr.write("Connected.\n")
-    for channel in sys.argv[4:]:
-        connection.join(channel)
+class LogBotFactory(protocol.ClientFactory):
+    """A factory for LogBots.
 
+    A new protocol instance will be created each time we connect to the server.
+    """
 
-def on_disconnect(connection, event):
-    raise SystemExit()
+    def buildProtocol(self, addr):
+        p = LogBot()
+        p.factory = self
+        return p
 
+    def clientConnectionLost(self, connector, reason):
+        """If we get disconnected, reconnect to server."""
+        connector.connect()
 
-def on_pubmsg(connection, msg):
+    def clientConnectionFailed(self, connector, reason):
+        sys.stderr.write("Connection failed: %s. Reconnecting.\n" % reason)
 
-    if len(msg.arguments) != 1:
-        return
-
-    payload = msg.arguments[0]
-    now = str(datetime.datetime.utcnow().isoformat())
-    channel = msg.target
-    print(json.dumps({'now': now, 'channel': channel, 'payload': payload}))
-
-
-def main():
-    reactor = irc.client.Reactor()
-    try:
-        sys.stderr.write("Connecting...\n")
-        c = reactor.server().connect(sys.argv[1], int(sys.argv[2]),
-                                     sys.argv[3] + str(uuid.uuid4()))
-    except irc.client.ServerConnectionError:
-        print(sys.exc_info()[1])
-        raise SystemExit(1)
-
-    c.add_global_handler("welcome", on_connect)
-    c.add_global_handler("disconnect", on_disconnect)
-    c.add_global_handler("pubmsg", on_pubmsg)
-
-    reactor.process_forever()
 
 if __name__ == '__main__':
-    main()
+    reactor.connectTCP(sys.argv[1], int(sys.argv[2]), LogBotFactory())
+    reactor.run()
