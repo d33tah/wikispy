@@ -17,6 +17,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: wikispy/templates/404.html:5
+msgid ""
+"\n"
+"The requested URL was not found on this server.\n"
+msgstr ""
+"\n"
+"Żądana strona nie została znaleziona na tym serwerze.\n"
+
+#: wikispy/templates/404.html:8 wikispy/templates/500.html:8
+msgid ""
+"\n"
+"Please report that to the administrator or file\n"
+"an issue <a href=\"https://github.com/d33tah/wikispy/issues\">here</a>.\n"
+msgstr ""
+"\n"
+"Proszę powiadomić o tym administratora lub utworzyć\n"
+"zgłoszenie <a href=\"https://github.com/d33tah/wikispy/issues\">tutaj</a>\n"
+"(przycisk \"New issue\").\n"
+
+#: wikispy/templates/500.html:5
+msgid ""
+"\n"
+"A server error occurred.\n"
+msgstr ""
+"\n"
+"Nastąpił błąd serwera.\n"
+
 #: wikispy/templates/base.html:8
 msgid "WikiSpy"
 msgstr "WikiSpy"

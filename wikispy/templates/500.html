@@ -1,0 +1,13 @@
+{% extends "error.html" %}
+{% load i18n %}{% load l10n %}{% load zwspace %}
+<p>
+{% block content %}
+{% blocktrans %}
+A server error occurred.
+{% endblocktrans %}
+{% blocktrans %}
+Please report that to the administrator or file
+an issue <a href="https://github.com/d33tah/wikispy/issues">here</a>.
+{% endblocktrans %}
+</p>
+{% endblock %}
