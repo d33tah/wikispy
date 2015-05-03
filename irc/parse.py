@@ -73,6 +73,8 @@ def handle_message(channel, now, payload):
 
 def main():
     for line in sys.stdin:
+        if not line.startswith('{'):
+            continue
         handle_message(**json.loads(line))
 
 if __name__ == '__main__':
