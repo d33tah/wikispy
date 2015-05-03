@@ -126,7 +126,7 @@ def query_scans_table(query, table):
     return sql_scans_table(sql, table, params)
 
 def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
-              startip=None, endip=None):
+              startip=None, endip=None, wikipedia_edit_id=None):
     cursor = connection.cursor()
     cursor.execute("SET enable_seqscan=off;")
 
@@ -146,6 +146,9 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
     elif startip is not None and endip is not None:
         where_sql = '"wikispy_edit"."ip" >= %s and "wikispy_edit"."ip" <= %s'
         params = [startip, endip, wikiname]
+    elif wikipedia_edit_id is not None:
+        where_sql = '"wikispy_edit"."wikipedia_edit_id" = %s'
+        params = [wikipedia_edit_id, wikiname]
 
     sql = """
     SELECT  "wikispy_edit"."id",

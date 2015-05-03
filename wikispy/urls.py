@@ -13,5 +13,7 @@ urlpatterns = patterns('',
         'wikispy.views.view_edit', name='home'),
     url(r'^by_rdns_random/(?P<wiki_name>[^/]*)/(?P<rdns>[^/]*)$',
         'wikispy.views.by_rdns_random', name='home'),
+    url(r'^by_rdns_single/(?P<wiki_name>[^/]*)/(?P<wikipedia_edit_id>[^/]*)$',
+        'wikispy.views.by_rdns_single', name='home'),
 
 )

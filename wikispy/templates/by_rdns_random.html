@@ -3,7 +3,11 @@
 
 {% block title %}
     {% block h1title %}
-        {{ rdns }} - {% trans "random edit browser" %}
+        {% if rdns %}
+            {{ rdns }} - {% trans "random edit browser" %}
+        {% else %}
+            {{ wiki_name }} - {% trans "random edit browser" %}
+        {% endif %}
     {% endblock %}
 {% endblock %}
 
@@ -21,4 +25,7 @@
     Refresh the page to see the next edit. For more information, click
     {% endblocktrans %}
     <a href="/">{% trans "HERE" %}</a>.
+    {% if rdns %}
+    <a href="/by_rdns_single/{{ wiki_name }}/{{ wikipedia_edit_id }}">{% trans "Link for sharing" %}</a>
+    {% endif %}
 {% endblock %}

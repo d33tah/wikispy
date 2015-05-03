@@ -138,5 +138,24 @@ def by_rdns_random(request, wiki_name, rdns):
     return render(request, 'by_rdns_random.html', {
         'edit': edit,
         'url': url,
-        'rdns': rdns
+        'rdns': rdns,
+        'wiki_name': wiki_name,
+        'wikipedia_edit_id': edit['wikipedia_edit_id'],
+    })
+
+def by_rdns_single(request, wiki_name, wikipedia_edit_id):
+
+    edits = list(get_edits(wiki_name, random=True,
+                           wikipedia_edit_id=wikipedia_edit_id))
+    if len(edits) == 0:
+        return error(request, _("No edits found."))
+    edit = edits[0]
+    language = edit['language'] + '.' if edit['language'] else ''
+    url = "https://%s%s/w/index.php?diff=prev&oldid=%s" % (language,
+        edit['domain'], edit['wikipedia_edit_id'])
+    return render(request, 'by_rdns_random.html', {
+        'edit': edit,
+        'url': url,
+        'wiki_name': wiki_name,
+        'wikipedia_edit_id': edit['wikipedia_edit_id'],
     })

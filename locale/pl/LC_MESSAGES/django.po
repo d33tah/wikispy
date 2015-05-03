@@ -92,6 +92,10 @@ msgstr ""
 msgid "HERE"
 msgstr "TUTAJ"
 
+#: wikispy/templates/by_rdns_random.html:28
+msgid "Link for sharing"
+msgstr "Link do dzielenia się"
+
 #: wikispy/templates/display_edits.html:6
 #, python-format
 msgid "rDNS query for %(rdns)s"
