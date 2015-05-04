@@ -13,7 +13,7 @@
 {% block content %}
 <p>
 
-    {% if offset >= pagesize %}
+    {% if offset >= pagesize and pagesize != 0 %}
     <a href="{{ baseurl }}/{{ offset|subtract:pagesize }}/{{ pagesize }}">
         {% trans "Previous page" %}</a>
     |
@@ -92,7 +92,7 @@
 </div>
 <p>
 
-    {% if offset >= pagesize %}
+    {% if offset >= pagesize and pagesize != 0 %}
     <a href="{{ baseurl }}/{{ offset|subtract:pagesize }}/{{ pagesize }}">
         {% trans "Previous page" %}</a>
     |
