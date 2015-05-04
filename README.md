@@ -79,4 +79,11 @@ compile translations:
 ./manage.py compilemessages
 ```
 
-*ALSO, REMEMBER TO CHANGE SECRET_KEY IN SETTINGS.PY!*
+Security notes
+==============
+
+Please take the following steps in order to increase the security of the
+website:
+
+1. In settings.py, change SECRET_KEY to a random value and DEBUG to False,
+2. Revoke PostgreSQL access to the COPY command in case of an SQL injection.
