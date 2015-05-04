@@ -60,9 +60,11 @@ def peek_results(edits, pagesize):
             i += 1
             if i >= pagesize:
                 break
+        iterator = itertools.islice(itertools.chain(taken, edits), 0, pagesize)
     else:
         has_next_page = False
-    return itertools.chain(taken, edits), has_next_page
+        iterator = itertools.chain(taken, edits)
+    return iterator, has_next_page
 
 
 def validate_pagesize_and_offset(f):

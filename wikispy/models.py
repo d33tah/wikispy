@@ -2,7 +2,6 @@ from django.db import models
 
 from django.db import connection
 import json
-import itertools
 from django.utils.translation import ugettext as _
 
 
@@ -127,8 +126,8 @@ def query_scans_table(query, table):
     sql, params = query.sql_with_params()
     return sql_scans_table(sql, table, params)
 
-def get_edits_internal(wikiname, offset=0, limit=50, random=False, rdns=None,
-                       startip=None, endip=None, wikipedia_edit_id=None):
+def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
+              startip=None, endip=None, wikipedia_edit_id=None):
     cursor = connection.cursor()
     cursor.execute("SET enable_seqscan=off;")
 
@@ -183,16 +182,6 @@ def get_edits_internal(wikiname, offset=0, limit=50, random=False, rdns=None,
     for row in cursor:
         yielded = dict(zip(description, row))
         yield yielded
-
-def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
-              startip=None, endip=None, wikipedia_edit_id=None):
-    ret = get_edits_internal(wikiname, offset, limit, random,
-                             rdns, startip, endip, wikipedia_edit_id)
-    if limit is not None and limit != 0:
-        return itertools.islice(ret, 0, limit)
-    else:
-        return ret
-
 
 def mark_watched(ip, wiki, wikipedia_edit_id):
     vq = ViewRecord.objects.filter(ip=ip, wiki__id=wiki.id,
