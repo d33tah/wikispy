@@ -189,7 +189,7 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
     ret = get_edits_internal(wikiname, offset, limit, random,
                              rdns, startip, endip, wikipedia_edit_id)
     if limit is not None and limit != 0:
-        return itertools.islice(ret, 0)
+        return itertools.islice(ret, 0, limit)
     else:
         return ret
 
