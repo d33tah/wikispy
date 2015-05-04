@@ -62,8 +62,7 @@ def peek_results(edits, pagesize):
                 break
     else:
         has_next_page = False
-    iterator = itertools.islice(itertools.chain(taken, edits), 0, pagesize)
-    return iterator, has_next_page
+    return itertools.chain(taken, edits), has_next_page
 
 
 def validate_pagesize_and_offset(f):
@@ -99,7 +98,7 @@ def validate_rdns(f):
 def by_rdns(request, wiki_name, rdns, offset, pagesize):
 
     try:
-        edits = get_edits(wiki_name, offset, pagesize + 1, rdns=rdns)
+        edits = get_edits(wiki_name, offset, pagesize, rdns=rdns)
     except ValueError:
         return error(request, _("The query is too big."))
 
@@ -122,7 +121,7 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
 @validate_pagesize_and_offset
 def by_ip(request, wiki_name, startip, endip, offset, pagesize):
 
-    edits = get_edits(wiki_name, offset, pagesize + 1, startip=startip,
+    edits = get_edits(wiki_name, offset, pagesize, startip=startip,
                       endip=endip)
 
     edits_checked, has_next_page = peek_results(edits, pagesize)
