@@ -28,36 +28,62 @@ def index(request):
     template_params['wikis'] = wikis
     return render(request, 'index.html', template_params)
 
+def peek_results(edits, pagesize):
+    """Check if "edits" actually contains any results. Returns "edits" after
+       iterating over it (the original might have some elements removed) and
+       a boolean value telling whether we should display a link to the new
+       page."""
+    try:
+        first = [next(edits)]
+    except StopIteration:
+        return None, False
 
+    return itertools.chain(first, edits), True
+
+def validate_pagesize_and_offset(f):
+    """A function decorator that sanitizes the pagesize and offset view
+       variables."""
+    def new_f(*args, **kwargs):
+        if kwargs.get('pagesize') is None:
+            kwargs['pagesize'] = 50
+        else:
+            kwargs['pagesize'] = int(kwargs['pagesize'])
+        if kwargs.get('offset') is None:
+            kwargs['offset'] = 0
+        else:
+            kwargs['offset'] = int(kwargs['offset'])
+        return f(*args, **kwargs)
+    return new_f
+
+def validate_rdns(f):
+    """A function decorator that sanitizes the rDNS string."""
+    def new_f(*args, **kwargs):
+        rdns = kwargs['rdns']
+        if not rdns.startswith('.'):
+            kwargs['rdns'] = '.' + rdns
+
+        if '%' in rdns:
+            return error(request, _("rDNS cannot contain %s sign." % '%'))
+
+        return f(*args, **kwargs)
+    return new_f
+
+@validate_rdns
+@validate_pagesize_and_offset
 def by_rdns(request, wiki_name, rdns, offset, pagesize):
-
-    if pagesize is None:
-        pagesize = 50
-    if offset is None:
-        offset = 0
-    offset, pagesize = int(offset), int(pagesize)
-
-    if not rdns.startswith('.'):
-        rdns = '.' + rdns
-
-    if '%' in rdns:
-        return error(request, _("rDNS cannot contain %s sign." % '%'))
 
     try:
         edits = get_edits(wiki_name, offset, pagesize, rdns=rdns)
     except ValueError:
         return error(request, _("The query is too big."))
 
-    # Let's see if it has any items...
-    try:
-        first = next(edits)
-    except StopIteration:
+    edits_checked, has_next_page = peek_results(edits, pagesize)
+    if edits_checked is None:
         return error(request, _("No results were found."))
 
-    edits_with_first_iter = itertools.chain([first], edits)
-
     return render(request, 'display_edits.html', {
-        'edits': edits_with_first_iter,
+        'has_next_page': has_next_page,
+        'edits': edits_checked,
         'wiki_name': wiki_name,
         'rdns': rdns,
         'offset': offset,
@@ -67,27 +93,19 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
         'baserandomurl' : '/by_rdns_random/' + wiki_name + '/' + rdns,
     })
 
+@validate_pagesize_and_offset
 def by_ip(request, wiki_name, startip, endip, offset, pagesize):
-
-    if pagesize is None:
-        pagesize = 50
-    if offset is None:
-        offset = 0
-    offset, pagesize = int(offset), int(pagesize)
 
     edits = get_edits(wiki_name, offset, pagesize, startip=startip,
                       endip=endip)
 
-    # Let's see if it has any items...
-    try:
-        first = next(edits)
-    except StopIteration:
+    edits_checked, has_next_page = peek_results(edits, pagesize)
+    if edits_checked is None:
         return error(request, _("No results were found."))
 
-    edits_with_first_iter = itertools.chain([first], edits)
-
     return render(request, 'display_edits.html', {
-        'edits': edits_with_first_iter,
+        'has_next_page': has_next_page,
+        'edits': edits_checked,
         'wiki_name': wiki_name,
         'startip': startip,
         'endip': endip,
@@ -120,13 +138,8 @@ def view_edit(request, wiki_name, edit_number):
     return HttpResponseRedirect(url)
 
 
+@validate_rdns
 def by_rdns_random(request, wiki_name, rdns):
-
-    if not rdns.startswith('.'):
-        rdns = '.' + rdns
-
-    if '%' in rdns:
-        return error(request, _("rDNS cannot contain %s sign." % '%'))
 
     edits = list(get_edits(wiki_name, random=True, rdns=rdns))
     if len(edits) == 0:

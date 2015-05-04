@@ -18,7 +18,7 @@
         {% trans "Previous page" %}</a>
     |
     {% endif %}
-    {% if pagesize != 0 %}
+    {% if pagesize != 0 and has_next_page %}
     <a href="{{ baseurl }}/{{ offset|add:"50" }}">
         {% trans "Next page" %}</a>
     |
@@ -97,7 +97,7 @@
         {% trans "Previous page" %}</a>
     |
     {% endif %}
-    {% if pagesize != 0 %}
+    {% if pagesize != 0 and has_next_page %}
     <a href="{{ baseurl }}/{{ offset|add:"50" }}">
         {% trans "Next page" %}</a>
     |
