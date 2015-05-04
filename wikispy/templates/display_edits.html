@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}{% load l10n %}{% load zwspace %}
+{% load i18n %}{% load l10n %}{% load zwspace %}{% load subtract %}
 {% block title %}
     {% block h1title %}
         {% if rdns %}
@@ -13,13 +13,13 @@
 {% block content %}
 <p>
 
-    {% if offset > 0 %}
-    <a href="{{ baseurl }}/{{ offset|add:"-50" }}">
+    {% if offset >= pagesize %}
+    <a href="{{ baseurl }}/{{ offset|subtract:pagesize }}/{{ pagesize }}">
         {% trans "Previous page" %}</a>
     |
     {% endif %}
     {% if pagesize != 0 and has_next_page %}
-    <a href="{{ baseurl }}/{{ offset|add:"50" }}">
+    <a href="{{ baseurl }}/{{ offset|add:pagesize }}/{{ pagesize }}">
         {% trans "Next page" %}</a>
     |
     <a href="{{ baseurl }}/0/0">
@@ -92,13 +92,13 @@
 </div>
 <p>
 
-    {% if offset > 0 %}
-    <a href="{{ baseurl }}/{{ offset|add:"-50" }}">
+    {% if offset >= pagesize %}
+    <a href="{{ baseurl }}/{{ offset|subtract:pagesize }}/{{ pagesize }}">
         {% trans "Previous page" %}</a>
     |
     {% endif %}
     {% if pagesize != 0 and has_next_page %}
-    <a href="{{ baseurl }}/{{ offset|add:"50" }}">
+    <a href="{{ baseurl }}/{{ offset|add:pagesize }}/{{ pagesize }}">
         {% trans "Next page" %}</a>
     |
     <a href="{{ baseurl }}/0/0">
