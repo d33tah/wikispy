@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from wikispy.models import get_edits, Wiki
+from wikispy.models import mark_watched, get_edits, Wiki
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _
 import itertools
@@ -27,6 +27,16 @@ def index(request):
     wikis = list(Wiki.objects.all())
     template_params['wikis'] = wikis
     return render(request, 'index.html', template_params)
+
+def get_client_ip(request):
+    """Returns a client IP - should also work behind a proxy."""
+    # Source: http://stackoverflow.com/a/4581997/1091116
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def peek_results(edits, pagesize):
     """Check if "edits" actually contains any results. Returns "edits" after
@@ -151,12 +161,14 @@ def view_edit(request, wiki_name, edit_number):
     if wiki.language:
         url += "%s." % wiki.language
     url += "%s/wiki/Special:MobileDiff/%s" % (wiki.domain, edit_number)
+    mark_watched(get_client_ip(request), wiki, edit_number)
     return HttpResponseRedirect(url)
 
 
 @validate_rdns
 def by_rdns_random(request, wiki_name, rdns):
 
+    wiki = Wiki.objects.filter(name=wiki_name)[0]
     edits = list(get_edits(wiki_name, random=True, rdns=rdns))
     if len(edits) == 0:
         return error(request, _("No edits found."))
@@ -164,6 +176,7 @@ def by_rdns_random(request, wiki_name, rdns):
     language = edit['language'] + '.' if edit['language'] else ''
     url = "https://%s%s/w/index.php?diff=prev&oldid=%s" % (language,
         edit['domain'], edit['wikipedia_edit_id'])
+    mark_watched(get_client_ip(request), wiki, edit['wikipedia_edit_id'])
     return render(request, 'by_rdns_random.html', {
         'edit': edit,
         'url': url,
@@ -174,6 +187,7 @@ def by_rdns_random(request, wiki_name, rdns):
 
 def by_rdns_single(request, wiki_name, wikipedia_edit_id):
 
+    wiki = Wiki.objects.filter(name=wiki_name)[0]
     edits = list(get_edits(wiki_name, random=True,
                            wikipedia_edit_id=wikipedia_edit_id))
     if len(edits) == 0:
@@ -182,6 +196,7 @@ def by_rdns_single(request, wiki_name, wikipedia_edit_id):
     language = edit['language'] + '.' if edit['language'] else ''
     url = "https://%s%s/w/index.php?diff=prev&oldid=%s" % (language,
         edit['domain'], edit['wikipedia_edit_id'])
+    mark_watched(get_client_ip(request), wiki, wikipedia_edit_id)
     return render(request, 'by_rdns_random.html', {
         'edit': edit,
         'url': url,

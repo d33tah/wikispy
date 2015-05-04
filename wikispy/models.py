@@ -2,6 +2,7 @@ from django.db import models
 
 from django.db import connection
 import json
+from django.utils.translation import ugettext as _
 
 
 class RightAnchored(models.Lookup):
@@ -130,7 +131,8 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
     cursor = connection.cursor()
     cursor.execute("SET enable_seqscan=off;")
 
-    order_sql = '\nORDER BY "wikispy_edit"."title"'
+    order_sql = ('\nORDER BY "wikispy_edit"."view_count" DESC,'
+                 ' "wikispy_edit"."title" ASC')
     limit_sql = ""
     offset_sql = ""
     if not random:
@@ -180,3 +182,20 @@ def get_edits(wikiname, offset=0, limit=50, random=False, rdns=None,
     for row in cursor:
         yielded = dict(zip(description, row))
         yield yielded
+
+def mark_watched(ip, wiki, wikipedia_edit_id):
+    vq = ViewRecord.objects.filter(ip=ip, wiki__id=wiki.id,
+                                   wikipedia_edit_id=wikipedia_edit_id)
+    if len(vq) != 0:
+        return
+    wq = Edit.objects.filter(wiki__id=wiki.id,
+                             wikipedia_edit_id=wikipedia_edit_id)
+    if len(wq) != 1:
+        raise ValueError(_("No edit found matching the query."))
+    v = ViewRecord()
+    v.ip = ip
+    v.wikipedia_edit_id = wikipedia_edit_id
+    v.wiki = wiki
+    v.save()
+    wq[0].view_count += 1
+    wq[0].save()
