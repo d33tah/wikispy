@@ -33,12 +33,28 @@ def peek_results(edits, pagesize):
        iterating over it (the original might have some elements removed) and
        a boolean value telling whether we should display a link to the new
        page."""
+    taken = []
     try:
-        first = [next(edits)]
+        taken += [next(edits)]
     except StopIteration:
         return None, False
+    if pagesize != 0:
+        has_next_page = True
+        i = 0
+        while True:
+            try:
+                taken += [next(edits)]
+            except StopIteration:
+                has_next_page = False
+                break
+            i += 1
+            if i >= pagesize:
+                break
+    else:
+        has_next_page = False
+    iterator = itertools.islice(itertools.chain(taken, edits), 0, pagesize)
+    return iterator, has_next_page
 
-    return itertools.chain(first, edits), True
 
 def validate_pagesize_and_offset(f):
     """A function decorator that sanitizes the pagesize and offset view
@@ -73,7 +89,7 @@ def validate_rdns(f):
 def by_rdns(request, wiki_name, rdns, offset, pagesize):
 
     try:
-        edits = get_edits(wiki_name, offset, pagesize, rdns=rdns)
+        edits = get_edits(wiki_name, offset, pagesize + 1, rdns=rdns)
     except ValueError:
         return error(request, _("The query is too big."))
 
@@ -96,7 +112,7 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
 @validate_pagesize_and_offset
 def by_ip(request, wiki_name, startip, endip, offset, pagesize):
 
-    edits = get_edits(wiki_name, offset, pagesize, startip=startip,
+    edits = get_edits(wiki_name, offset, pagesize + 1, startip=startip,
                       endip=endip)
 
     edits_checked, has_next_page = peek_results(edits, pagesize)
