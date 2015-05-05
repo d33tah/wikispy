@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: wikispy/models.py:196
+msgid "No edit found matching the query."
+msgstr "Nie znaleziono edycji pasującej do tego zapytania."
+
 #: wikispy/templates/404.html:5
 msgid ""
 "\n"
@@ -471,6 +475,10 @@ msgstr ""
 #, python-format
 msgid "rDNS cannot contain %s sign."
 msgstr "rDNS nie może zawierać znaku %s."
+
+#: wikispy/views.py:105
+msgid "The query is too big."
+msgstr "To zapytanie jest zbyt duże."
 
 #: wikispy/views.py:52 wikispy/views.py:82
 msgid "No results were found."
