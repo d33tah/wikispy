@@ -35,6 +35,7 @@ class LogBot(irc.IRCClient):
     nickname = "%s-%s" % (sys.argv[3], str(uuid.uuid4()))
 
     def connectionMade(self):
+        sys.stderr.write("Connection made.\n")
         irc.IRCClient.connectionMade(self)
 
     def connectionLost(self, reason):
@@ -44,6 +45,7 @@ class LogBot(irc.IRCClient):
 
     def signedOn(self):
         """Called when bot has succesfully signed on to server."""
+        sys.stderr.write("Signed on.\n")
         for channel in sys.argv[4:]:
             self.join(channel)
 
@@ -67,6 +69,7 @@ class LogBotFactory(protocol.ClientFactory):
         return p
 
     def clientConnectionLost(self, connector, reason):
+        sys.stderr.write("Connection lost: %s. Reconnecting.\n" % reason)
         """If we get disconnected, reconnect to server."""
         connector.connect()
 
