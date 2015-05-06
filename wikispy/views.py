@@ -26,6 +26,7 @@ def index(request):
 
     wikis = list(Wiki.objects.all())
     template_params['wikis'] = wikis
+    template_params['keepstats'] = get_keepstats(request)
     return render(request, 'index.html', template_params)
 
 def get_client_ip(request):
@@ -118,6 +119,7 @@ def by_rdns(request, wiki_name, rdns, offset, pagesize):
         'skip_labels': pagesize == 0,
         'baseurl' : '/by_rdns/' + wiki_name + '/' + rdns,
         'baserandomurl' : '/by_rdns_random/' + wiki_name + '/' + rdns,
+        'keepstats': get_keepstats(request),
     })
 
 @validate_pagesize_and_offset
@@ -140,21 +142,27 @@ def by_ip(request, wiki_name, startip, endip, offset, pagesize):
         'pagesize': pagesize,
         'baseurl' : '/by_ip/' + wiki_name + '/' + startip + '/' + endip,
         'skip_labels': pagesize == 0,
+        'keepstats': get_keepstats(request),
     })
 
 def error(request, error_str):
-    return render(request, 'error.html', {'error': error_str})
+    return render(request, 'error.html', {
+        'error': error_str,
+        'keepstats': get_keepstats(request),
+    })
 
 
 def rules(request):
-    return render(request, 'rules.html', {})
+    return render(request, 'rules.html', {'keepstats': get_keepstats(request)})
 
 
 def privacy(request):
-    return render(request, 'privacy.html', {})
+    return render(request, 'privacy.html', {
+        'keepstats': get_keepstats(request)
+    })
 
 def info(request):
-    return render(request, 'info.html', {})
+    return render(request, 'info.html', {'keepstats': get_keepstats(request)})
 
 def view_edit(request, wiki_name, edit_number):
     wiki = Wiki.objects.filter(name=wiki_name)[0]
@@ -162,8 +170,16 @@ def view_edit(request, wiki_name, edit_number):
     if wiki.language:
         url += "%s." % wiki.language
     url += "%s/wiki/Special:MobileDiff/%s" % (wiki.domain, edit_number)
-    mark_watched(get_client_ip(request), wiki, edit_number)
+    if get_keepstats(request) == 1:
+        mark_watched(get_client_ip(request), wiki, edit_number)
+    else:
+        # TODO: ask the user if it's okay to keep stats
+        pass
     return HttpResponseRedirect(url)
+
+
+def get_keepstats(request):
+    return int(request.COOKIES.get('keepstats', 2))
 
 
 @validate_rdns
@@ -177,13 +193,16 @@ def by_rdns_random(request, wiki_name, rdns):
     language = edit['language'] + '.' if edit['language'] else ''
     url = "https://%s%s/w/index.php?diff=prev&oldid=%s" % (language,
         edit['domain'], edit['wikipedia_edit_id'])
-    mark_watched(get_client_ip(request), wiki, edit['wikipedia_edit_id'])
+    keepstats = get_keepstats(request)
+    if keepstats == 1:
+        mark_watched(get_client_ip(request), wiki, edit['wikipedia_edit_id'])
     return render(request, 'by_rdns_random.html', {
         'edit': edit,
         'url': url,
         'rdns': rdns,
         'wiki_name': wiki_name,
         'wikipedia_edit_id': edit['wikipedia_edit_id'],
+        'keepstats': keepstats,
     })
 
 def by_rdns_single(request, wiki_name, wikipedia_edit_id):
@@ -197,10 +216,13 @@ def by_rdns_single(request, wiki_name, wikipedia_edit_id):
     language = edit['language'] + '.' if edit['language'] else ''
     url = "https://%s%s/w/index.php?diff=prev&oldid=%s" % (language,
         edit['domain'], edit['wikipedia_edit_id'])
-    mark_watched(get_client_ip(request), wiki, wikipedia_edit_id)
+    keepstats = get_keepstats(request)
+    if keepstats == 1:
+        mark_watched(get_client_ip(request), wiki, wikipedia_edit_id)
     return render(request, 'by_rdns_random.html', {
         'edit': edit,
         'url': url,
         'wiki_name': wiki_name,
         'wikipedia_edit_id': edit['wikipedia_edit_id'],
+        'keepstats': keepstats,
     })

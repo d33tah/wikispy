@@ -38,6 +38,24 @@
 
 <body>
 
+    {% if keepstats == 2 %}
+    <script>
+    if (confirm(
+        {% blocktrans %}
+        'WikiSpy needs your permission to store your IP address.\n\n' +
+        'We only use it to count unique views of given articles' +
+        ' and show you the most popular ones.\n\n' +
+        'Most websites do this, but we would rather ask you - do you agree?' +
+        '\n\n(This will store a cookie file in your browser.\n' +
+        'If you do not agree, please leave the website.\n' +
+        'For more details, click the "Privacy Policy" link in the menu.)'
+        {% endblocktrans %})) {
+        document.cookie = 'keepstats=1; path=/';
+    } else {
+        document.cookie = 'keepstats=0; path=/';
+    }
+    </script>
+    {% endif %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
