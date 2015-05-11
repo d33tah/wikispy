@@ -11,8 +11,12 @@ $ tail -f out.json | python parse.py
 
 More output should follow. The JSON line was split for readability purposes.
 
+TODO: split parse_message into parse_message and handle_message that queries
+rDNS and removes fields from the parsing result.
+
 Author: Jacek Wielemborek, licensed under WTFPL.
 """
+
 
 import sys
 import re
@@ -38,7 +42,7 @@ def valid_ip(address):
         return False
 
 
-def handle_message(skip_rdns, channel, now, payload):
+def parse_message(skip_rdns, channel, now, payload):
 
     match = re.match(MATCH_REGEX, payload)
     if match is None:
@@ -70,14 +74,14 @@ def handle_message(skip_rdns, channel, now, payload):
     json_dict['timestamp'] = now
     json_dict['channel'] = channel
 
-    print(json.dumps(json_dict))
+    return json_dict
 
 
 def main(skip_rdns):
     for line in sys.stdin:
         if not line.startswith('{'):
             continue
-        handle_message(skip_rdns, **json.loads(line))
+        print(json_dumps(parse_message(skip_rdns, **json.loads(line))))
 
 if __name__ == '__main__':
     main(len(sys.argv) > 1)
