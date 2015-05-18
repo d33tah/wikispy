@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 import sys
 
+if sys.stdout.isatty():
+    sys.exit("ERROR: the standard input is a terminal. "
+             "Please use this script as a filter.")
+
 wiki_id = int(sys.argv[1])
 
 f = open(sys.argv[2])
