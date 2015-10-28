@@ -30,7 +30,7 @@ project. You can download it here: https://scans.io/study/sonar.rdns
 Create the table using the following SQL command:
 
 ```
-CREATE TABLE rdns(ip INET, rdns TEXT);
+CREATE TABLE wikispy_rdns(ip INET, rdns TEXT);
 ```
 
 Load the .gz rDNS archive without duplicates. I used the following command for
@@ -40,7 +40,7 @@ that:
 pv 20150311-rdns.gz | \
 pigz -d | \
 pypy ./make-rdns.py | \
-psql -c 'COPY rdns FROM stdin'
+psql -c 'COPY wikispy_rdns FROM stdin'
 ```
 
 "pv" is just there to show you a progress bar. You can replace it with "cat".
